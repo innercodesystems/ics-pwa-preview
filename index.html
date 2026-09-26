@@ -1,10 +1,49 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>ICS App Preview</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f6f1e7">
+<title>INNER CODE SYSTEMS</title>
+<style>
+:root{--bg:#f6f1e7;--card:#fffdf8;--ink:#1a1815;--muted:#786f64;--gold:#b8924f;--line:#dfd5c5}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,sans-serif}
+.app{max-width:760px;margin:auto;padding:28px 18px 110px}.brand{text-align:center;padding:14px 0 25px}
+.mark{width:82px;height:82px;margin:auto;border:1px solid var(--gold);border-radius:25px;display:grid;place-items:center;font-family:Georgia,serif;font-size:28px;letter-spacing:5px;background:#fffaf0;box-shadow:0 8px 30px #b8924f22}
+.brand h1{font-family:Georgia,serif;font-weight:400;letter-spacing:8px;font-size:22px;margin:18px 0 7px}.brand p{margin:0;color:var(--gold);font-size:11px;letter-spacing:4px}
+.hero{padding:20px 4px 24px}.eyebrow{font-size:12px;letter-spacing:3px;color:var(--gold);font-weight:bold}.hero h2{font-family:Georgia,serif;font-weight:400;font-size:42px;line-height:1.05;margin:12px 0}.hero p{color:var(--muted);line-height:1.6}
+.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:22px;margin:14px 0;box-shadow:0 8px 24px #382b1710}.card h3{font-family:Georgia,serif;font-size:27px;font-weight:400;margin:8px 0}.card p{color:var(--muted);line-height:1.5;margin:7px 0 16px}
+.btn{display:inline-block;border:0;border-radius:999px;padding:13px 18px;background:var(--ink);color:white;font-weight:bold}.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.mini{min-height:145px}.icon{font-size:25px;color:var(--gold)}
+.quote{text-align:center;padding:30px 15px;font-family:Georgia,serif;font-size:25px;line-height:1.35}.quote small{display:block;font-family:Arial,sans-serif;font-size:10px;letter-spacing:3px;color:var(--gold);margin-top:13px}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#fffdf8ee;backdrop-filter:blur(15px);border-top:1px solid var(--line);padding:10px max(12px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom));display:flex;justify-content:space-around;z-index:9}
+.nav button{border:0;background:none;color:#7b7369;font-size:11px;min-width:58px}.nav b{display:block;font-size:20px;color:var(--gold);margin-bottom:4px}.nav .active{color:var(--ink);font-weight:bold}
+.view{display:none}.view.active{display:block}
+@media(max-width:420px){.hero h2{font-size:38px}.app{padding-left:15px;padding-right:15px}}
+</style>
 </head>
 <body>
-  <h1>ICS App Preview</h1>
-</body>
-</html>
+<div class="app">
+<section id="heute" class="view active">
+ <div class="brand"><div class="mark">ICS</div><h1>ICS</h1><p>INNER CODE SYSTEMS</p></div>
+ <div class="hero"><div class="eyebrow">DEIN MOMENT</div><h2>Alles beginnt mit deiner Aufmerksamkeit.</h2><p>Verstehen. Spüren. Handeln. Integrieren.</p></div>
+ <div class="card"><div class="eyebrow">HEUTE</div><h3>Wie geht es dir gerade?</h3><p>Nimm dir einen kurzen Moment und spüre, was jetzt wirklich da ist.</p><button class="btn" onclick="show('mein')">Mein ICS öffnen</button></div>
+ <div class="grid"><div class="card mini"><div class="icon">◉</div><h3>Mikro-RESET</h3><p>Zurück in deinen Moment.</p></div><div class="card mini"><div class="icon">◇</div><h3>Kompass</h3><p>Wo lenkst du deine Energie hin?</p></div></div>
+ <div class="quote">„Vom Überlebensmodus in den Schöpfermodus.“<small>INNER CODE SYSTEMS</small></div>
+</section>
+<section id="mein" class="view"><div class="brand"><div class="mark">ICS</div><h1>MEIN ICS</h1></div><div class="hero"><div class="eyebrow">DEIN RAUM</div><h2>Deine Entwicklung auf einen Blick.</h2><p>Deine Tools, Reflexionen und persönlichen Schritte an einem Ort.</p></div><div class="card"><h3>Meine Tools</h3><p>RESET · Werte-Kompass · Glaubenssatz-Kompass · Modus-Kompass</p><button class="btn">Tools entdecken</button></div><div class="card"><h3>Meine Entwicklung</h3><p>Hier entsteht später deine persönliche Übersicht mit gespeicherten Entwicklungen.</p></div></section>
+<section id="journal" class="view"><div class="brand"><div class="mark">ICS</div><h1>JOURNAL</h1></div><div class="hero"><div class="eyebrow">REFLEXION</div><h2>Was möchtest du heute festhalten?</h2></div><div class="card"><h3>Gedanken des Tages</h3><p>Ein ruhiger Ort für Erkenntnisse, Intentionen und neue Entscheidungen.</p><button class="btn">Eintrag beginnen</button></div></section>
+<section id="welten" class="view"><div class="brand"><div class="mark">ICS</div><h1>WELTEN</h1></div><div class="hero"><div class="eyebrow">DEIN SYSTEM</div><h2>Fünf Welten. Ein Weg zu dir.</h2></div><div class="grid"><div class="card mini"><h3>INNER</h3><p>Verstehen</p></div><div class="card mini"><h3>BODY</h3><p>Spüren</p></div><div class="card mini"><h3>ACTION</h3><p>Handeln</p></div><div class="card mini"><h3>RESET</h3><p>Integrieren</p></div></div><div class="card"><h3>ORIENTIERUNG</h3><p>Klarheit für deinen nächsten Schritt.</p></div></section>
+<section id="mehr" class="view"><div class="brand"><div class="mark">ICS</div><h1>MEHR</h1></div><div class="card"><h3>ICS Bibliothek</h3><p>Tools, Meditationen und Wissen.</p></div><div class="card"><h3>Begleitung</h3><p>RESET Coaching · Human Design · Transformationsmassage.</p></div><div class="card"><h3>Inner Code Systems</h3><p>Verstehen · Spüren · Handeln · Integrieren.</p></div></section>
+</div>
+<nav class="nav">
+<button class="active" onclick="show('heute',this)"><b>◉</b>Heute</button>
+<button onclick="show('mein',this)"><b>◎</b>Mein ICS</button>
+<button onclick="show('journal',this)"><b>✎</b>Journal</button>
+<button onclick="show('welten',this)"><b>◇</b>Welten</button>
+<button onclick="show('mehr',this)"><b>•••</b>Mehr</button>
+</nav>
+<script>
+function show(id,btn){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');else document.querySelectorAll('.nav button')[1].classList.add('active');scrollTo(0,0)}
+</script>
+</body></html>
