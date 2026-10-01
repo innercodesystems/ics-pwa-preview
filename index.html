@@ -425,9 +425,9 @@ development.textContent='Verbinde Freiheit mit Bewusstheit: Handle nicht nur aus
 document.getElementById('developmentTitle').textContent='Nicht mehr nur reagieren – bewusst ausrichten.';
 document.getElementById('cardName').textContent=(n?n+' · ':'')+'Mein INNER CODE';
 document.getElementById('cardBig3').textContent='☉ '+ss+'   ·   ☽ '+ms+'   ·   ↑ '+as;
-document.getElementById('cardStrength').textContent=strength.textContent;
-document.getElementById('cardPattern').textContent=pattern.textContent;
-document.getElementById('cardDevelopment').textContent=development.textContent;
+document.getElementById('cardStrength').textContent='Ich richte mich auf '+core[si]+' aus und gebe zugleich meinem Bedürfnis nach '+emotionalDat[mi]+' Raum.';
+document.getElementById('cardPattern').textContent='Ich achte darauf, weder meinen Kern noch mein emotionales Bedürfnis zu übergehen, wenn ich entscheide und handle.';
+document.getElementById('cardDevelopment').textContent='Ich entwickle '+core[idx(pSign.Mondknoten)]+' – Schritt für Schritt dort, wo mein Leben mich konkret dazu einlädt.';
 let placements=[si,mi,ai],ec={},modeCounts={};placements.forEach(i=>{ec[elements[i]]=(ec[elements[i]]||0)+1;modeCounts[modes[i]]=(modeCounts[modes[i]]||0)+1});let domE=Object.keys(ec).sort((a,b)=>ec[b]-ec[a])[0],domM=Object.keys(modeCounts).sort((a,b)=>modeCounts[b]-modeCounts[a])[0];
 let houseBodies={Sonne:sl,Mond:ml,...pl},houseMap={};Object.keys(houseBodies).forEach(k=>houseMap[k]=houseOf(houseBodies[k],al));
 document.getElementById('houseGrid').innerHTML=houseNames.map((hn,i)=>{let c=houseCusp(al,i+1);return '<div class="code-chip"><b>HAUS '+(i+1)+' · '+sign(c)+' '+signDegree(c)+'</b>'+hn+'</div>'}).join('');
