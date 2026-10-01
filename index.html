@@ -373,7 +373,7 @@ function planetApprox(J,planet){
  return norm(deg(Math.atan2(rr*Math.cos(lat)*Math.sin(lon)+ys,rr*Math.cos(lat)*Math.cos(lon)+xs)));
 }
 function sunGeo(J){let d=J-2451543.5,w=norm(282.9404+4.70935e-5*d),e=.016709-1.151e-9*d,M=norm(356.047+0.9856002585*d),E=rad(M+deg(e*Math.sin(rad(M))*(1+e*Math.cos(rad(M))))),x=Math.cos(E)-e,y=Math.sqrt(1-e*e)*Math.sin(E),v=deg(Math.atan2(y,x)),r=Math.sqrt(x*x+y*y);return{lon:norm(v+w),r}}
-function nodeLon(J){let d=J-2451543.5;return norm(125.1228-.0529538083*d+180)}
+function nodeLon(J){let d=J-2451543.5;return norm(125.1228-.0529538083*d)}
 const bodyMeaning={Sonne:'Identität und bewusster Wille',Mond:'Gefühl und emotionale Bedürfnisse',Aszendent:'Auftreten und unmittelbare Lebenshaltung',MC:'Wirkung, Richtung und öffentliche Rolle',Merkur:'Denken und Kommunikation',Venus:'Werte, Anziehung und Beziehung',Mars:'Handlung, Begehren und Durchsetzung',Jupiter:'Wachstum, Sinn und Vertrauen',Saturn:'Grenzen, Verantwortung und Reifung',Uranus:'Freiheit, Erneuerung und Eigenart',Neptun:'Intuition, Sehnsucht und Durchlässigkeit',Pluto:'Tiefe, Macht und Transformation',Mondknoten:'Entwicklungsrichtung'};
 const aspectMeaning={
 Konjunktion:{kraft:'Zwei Kräfte bündeln sich und werden besonders deutlich erlebt.',muster:'Weil beide Energien eng gekoppelt sind, kann es schwerfallen, sie getrennt wahrzunehmen.',impuls:'Benenne beide Bedürfnisse einzeln und entscheide dann, wie sie gemeinsam wirken sollen.'},
