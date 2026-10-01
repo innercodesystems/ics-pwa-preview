@@ -75,7 +75,20 @@
   #decisionCodeCard:has(> :last-child:empty){display:none!important}
   .card:has(> div[id]:last-child:empty){display:none!important}
   .card:has(> p[id]:last-child:empty){display:none!important}
-}</style></head><body><main class="wrap"><div class="brand">INNER CODE SYSTEMS</div>
+}/* PRINT PAGINATION FIX · prevent blank pages */
+@media print{
+  .card{break-inside:auto!important;page-break-inside:auto!important}
+  .reflection,.theme-box,.deep-panel,.info-panel{break-inside:auto!important;page-break-inside:auto!important}
+  .chapter+.card{break-before:auto!important;page-break-before:auto!important}
+  .card>.tag,.card>.tag+h2,.card>.tag+h3,
+  .card>h1:first-child,.card>h2:first-child,.card>h3:first-child{
+    break-before:auto!important;page-break-before:auto!important;
+    break-after:auto!important;page-break-after:auto!important
+  }
+  .card:empty,.reflection:empty,.theme-box:empty,.deep-panel:empty,.info-panel:empty{display:none!important}
+  .print-cover{break-after:page!important;page-break-after:always!important}
+}
+</style></head><body><main class="wrap"><div class="brand">INNER CODE SYSTEMS</div>
 <section id="s1" class="step on"><div class="hero"><div class="orb">✦</div><h1>Dein INNER CODE</h1><p>Ein erster Blick auf deinen astrologischen Grundcode – klar, persönlich und ohne Fachsprache.</p></div><div class="card"><div class="tag">DEIN PERSÖNLICHER ASTRO-CODE</div><p>Geburtsdatum, genaue Uhrzeit und Geburtsort genügen.</p><button onclick="go(2)">MEINEN CODE ENTDECKEN</button></div></section>
 <section id="s2" class="step"><div class="hero"><div class="orb">☉</div><h1>Deine Geburtsdaten</h1><p>Bitte so genau wie möglich eingeben.</p></div><div class="card"><label>Vorname</label><input id="name" placeholder="Dein Vorname"><label>Geburtsdatum</label><input id="date" type="date"><label>Geburtszeit</label><input id="time" type="time"><label>Geburtsort</label><input id="place" placeholder="z. B. Überlingen, Deutschland"><div id="err" class="err"></div><button id="calc" onclick="preview()">MEINEN CODE BERECHNEN</button><button type="button" id="newPersonBtn" onclick="newPerson()" style="width:100%;padding:14px;margin-top:12px;border:1px solid #b8924f88;border-radius:14px;background:transparent;color:#b8924f;font-weight:800;font-size:14px">NEUE PERSON · DATEN LÖSCHEN</button></div></section>
 <section id="s3" class="step result"><div id="readingProgress" aria-hidden="true"><div id="readingProgressBar"></div></div><div class="hero"><div class="orb">✧</div><h1 id="title">Mein INNER CODE</h1><p id="meta"></p></div><div id="startHereCard" class="card" style="margin-bottom:12px"><div class="tag">START HIER</div><h2 style="margin:8px 0 6px">Was möchtest du gerade?</h2><p style="margin-top:0">Du musst nicht den ganzen INNER CODE lesen. Wähle deinen Einstieg.</p><div class="start-choice-grid"><button type="button" onclick="jumpTo('onePageCodeCard')"><b>ICH WILL MICH VERSTEHEN</b><span>Kurzfassung meines Codes</span></button><button type="button" onclick="jumpTo('decisionCodeCard')"><b>ICH BRAUCHE KLARHEIT</b><span>Eine Entscheidung sortieren</span></button><button type="button" onclick="jumpTo('relationshipDepthCard')"><b>ICH WILL BEZIEHUNG VERSTEHEN</b><span>Nähe & Dynamik ansehen</span></button><button type="button" onclick="jumpTo('nextStepCodeCard')"><b>ICH WILL INS HANDELN</b><span>Meinen nächsten Schritt finden</span></button></div></div><details class="guide"><summary>☰ INNER CODE WEGWEISER <span id="buildBadge" style="float:none;margin-left:8px;font-size:9px;padding:3px 6px;border:1px solid #b8924f66;border-radius:99px">NEU SORTIERT</span></summary><div class="guide-grid" data-guide-groups="2026"><div class="guide-group-title">SCHNELLSTART</div><button data-guide-latest="next-step" onclick="jumpTo('nextStepCodeCard')"><b>★ NEU · NÄCHSTER SCHRITT</b>Ins Handeln kommen</button><button data-guide-latest="sentence-top" onclick="jumpTo('integrationSentenceCard')"><b>★ NEU · DEIN SATZ</b>Persönlicher Alltagsanker</button>
