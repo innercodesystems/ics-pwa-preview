@@ -165,6 +165,19 @@
     line-height:1.15!important;
   }
 }
+/* PRINT FLOW PASS 4 · keep Equal-House note with the house grid */
+@media print{
+  #houseGrid + .note{
+    margin:0!important;
+    padding-top:.55mm!important;
+    font-size:7.2pt!important;
+    line-height:1.05!important;
+    break-before:avoid-page!important;
+    page-break-before:avoid!important;
+    break-inside:avoid-page!important;
+    page-break-inside:avoid!important;
+  }
+}
 /* MOBILE FORM FIX · keep Android autofill from visually covering fields */
 @media (max-width:700px){
   #s2 input,#s2 select{
