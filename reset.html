@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RESET · Muster verändern | Inner Code Systems</title>
+
+<style>
+:root{
+  --cream:#faf1cb;
+  --light:#f8f3e8;
+  --gold:#d4a03a;
+  --black:#1a1815;
+  --dark:#211d18;
+  --text:#6f685f;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  background:var(--light);
+  color:var(--black);
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+a{color:inherit}
+
+/* HEADER */
+
+.header{
+  min-height:74px;
+  padding:12px 5%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:#fffaf0;
+  border-bottom:1px solid rgba(212,160,58,.22);
+}
+
+.brand{
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.brand img{
+  width:46px;
+  height:46px;
+  object-fit:contain;
+}
+
+.brand-main{
+  display:block;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:25px;
+}
+
+.brand-sub{
+  display:block;
+  font-size:9px;
+  letter-spacing:.15em;
+}
+
+.nav{
+  display:flex;
+  align-items:center;
+  gap:24px;
+}
+
+.nav a{
+  text-decoration:none;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.08em;
+}
+
+.nav .active{color:var(--gold)}
+
+/* MOBILE NAVIGATION */
+
+.menu-button,
+.mobile-menu{
+  display:none;
+}
+
+@media(max-width:950px){
+
+  .menu-button{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    border:1px solid rgba(212,160,58,.35);
+    border-radius:8px;
+    background:#fffdf8;
+    color:#1a1815;
+    font-size:24px;
+    cursor:pointer;
+  }
+
+  .mobile-menu{
+    display:none;
+    padding:20px 5%;
+    background:#fffdf8;
+    border-top:1px solid rgba(212,160,58,.16);
+    box-shadow:0 15px 30px rgba(26,26,26,.12);
+  }
+
+  .mobile-menu.open{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+
+  .mobile-menu a{
+    color:#1a1815;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.04em;
+  }
+
+  .mobile-menu .active{
+    color:#d4a03a;
+  }
+}
+
+/* HERO */
+
+.hero{
+  background:var(--black);
+  color:#f6f1e7;
+}
+
+.hero-inner{
+  max-width:1240px;
+  margin:auto;
+  padding:100px 34px 92px;
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:70px;
+  align-items:center;
+}
+
+.kicker{
+  color:var(--gold);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.18em;
+  margin-bottom:18px;
+}
+
+h1{
+  margin:0;
+  font-family:Georgia,"Times New Roman",serif;
+  font-weight:400;
+  font-size:clamp(55px,6vw,88px);
+  line-height:.98;
+}
+
+.hero-text{
+  max-width:670px;
+  margin:25px 0 0;
+  color:#c9c0b3;
+  font-size:18px;
+  line-height:1.7;
+}
+
+.hero-side{
+  padding:34px;
+  border:1px solid #59472c;
+  border-radius:18px;
+  background:#211d18;
+}
+
+.hero-side-label{
+  color:var(--gold);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.15em;
+}
+
+.hero-side h2{
+  margin:12px 0 12px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-weight:400;
+  font-size:32px;
+}
+
+.hero-side p{
+  color:#c9c0b3;
+  line-height:1.65;
+}
+
+.button{
+  display:inline-block;
+  margin-top:14px;
+  padding:15px 22px;
+  border-radius:8px;
+  background:var(--gold);
+  color:#17130e;
+  text-decoration:none;
+  font-weight:800;
+  font-size:14px;
+}
+
+/* CONTENT */
+
+.content{
+  max-width:1240px;
+  margin:auto;
+  padding:92px 34px;
+}
+
+.section{
+  padding:78px 0;
+}
+
+.section + .section{
+  border-top:1px solid rgba(212,160,58,.20);
+}
+
+.section-kicker{
+  color:var(--gold);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.16em;
+  margin-bottom:13px;
+}
+
+.section-title{
+  margin:0;
+  max-width:820px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(38px,4.5vw,58px);
+  line-height:1.05;
+  font-weight:400;
+}
+
+.section-intro{
+  max-width:760px;
+  color:var(--text);
+  line-height:1.75;
+  font-size:16px;
+  margin:20px 0 38px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+
+.grid.four{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+}
+
+.card{
+  padding:27px;
+  min-height:225px;
+  background:#fffdf8;
+  border:1px solid rgba(212,160,58,.25);
+  border-radius:16px;
+  text-decoration:none;
+  box-shadow:0 10px 30px rgba(0,0,0,.04);
+  transition:.2s ease;
+}
+
+a.card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(212,160,58,.6);
+}
+
+.card-label{
+  color:var(--gold);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.14em;
+  margin-bottom:20px;
+}
+
+.card h3{
+  margin:0 0 12px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:24px;
+  font-weight:400;
+}
+
+.card p{
+  margin:0;
+  color:#746d64;
+  font-size:14px;
+  line-height:1.65;
+}
+
+.card-link{
+  display:inline-block;
+  margin-top:22px;
+  color:var(--gold);
+  font-size:13px;
+  font-weight:800;
+}
+
+/* DARK */
+
+.dark{
+  background:var(--black);
+  color:#f6f1e7;
+}
+
+.dark .content{
+  padding-top:90px;
+  padding-bottom:90px;
+}
+
+.dark .section-title{color:#f6f1e7}
+.dark .section-intro{color:#c4bbaf}
+
+.dark .card{
+  background:#211d18;
+  border-color:#514229;
+  box-shadow:none;
+}
+
+.dark .card h3{color:#f6f1e7}
+.dark .card p{color:#c7beb2}
+
+/* APP */
+
+.app-box{
+  padding:45px;
+  border-radius:20px;
+  background:#fffdf8;
+  border:1px solid rgba(212,160,58,.28);
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:45px;
+  align-items:center;
+}
+
+.app-box h3{
+  margin:0 0 15px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:38px;
+  font-weight:400;
+}
+
+.app-box p{
+  color:#746d64;
+  line-height:1.7;
+}
+
+.app-list{
+  display:grid;
+  gap:10px;
+}
+
+.app-item{
+  padding:14px 16px;
+  border-radius:10px;
+  background:#f4ecdc;
+  font-size:14px;
+}
+
+/* WORLDS */
+
+.worlds{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+}
+
+.world{
+  text-decoration:none;
+  padding:20px 14px;
+  border:1px solid rgba(212,160,58,.3);
+  border-radius:12px;
+  text-align:center;
+  background:#fffdf8;
+}
+
+.world strong{
+  display:block;
+  color:var(--gold);
+  font-size:11px;
+  letter-spacing:.1em;
+}
+
+.world span{
+  display:block;
+  margin-top:7px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:17px;
+}
+
+.world.current{
+  background:var(--black);
+  color:#f6f1e7;
+}
+
+/* FINAL */
+
+.final{
+  padding:55px;
+  border-radius:20px;
+  background:var(--black);
+  color:#f6f1e7;
+}
+
+.final h2{
+  margin:0;
+  max-width:760px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:42px;
+  font-weight:400;
+}
+
+.final p{
+  max-width:680px;
+  color:#c7beb2;
+  line-height:1.7;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:950px){
+  .nav{display:none}
+  .hero-inner{grid-template-columns:1fr}
+  .grid,.grid.four{grid-template-columns:repeat(2,1fr)}
+  .app-box{grid-template-columns:1fr}
+  .worlds{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:620px){
+  .hero-inner,.content{
+    padding-left:20px;
+    padding-right:20px;
+  }
+
+  .hero-inner{padding-top:65px;padding-bottom:65px}
+  h1{font-size:56px}
+  .grid,.grid.four{grid-template-columns:1fr}
+  .worlds{grid-template-columns:1fr}
+  .app-box,.final{padding:28px}
+  .section{padding:58px 0}
+}
+
+/* =========================================
+   ICS PREMIUM FOOTER
+========================================= */
+
+.ics-footer{
+  background:#171512;
+  color:#f6f1e7;
+  border-top:1px solid rgba(212,160,58,.28);
+}
+
+.ics-footer-inner{
+  max-width:1240px;
+  margin:0 auto;
+  padding:64px 34px 28px;
+}
+
+.ics-footer-top{
+  display:grid;
+  grid-template-columns:1.3fr .9fr .9fr;
+  gap:54px;
+  padding-bottom:46px;
+}
+
+.ics-footer-brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:20px;
+}
+
+.ics-footer-logo{
+  width:58px;
+  height:58px;
+  object-fit:contain;
+}
+
+.ics-footer-name{
+  font-family:Georgia,"Times New Roman",serif;
+  color:#d4a03a;
+  font-size:25px;
+  letter-spacing:.04em;
+}
+
+.ics-footer-sub{
+  margin-top:4px;
+  color:#9f9689;
+  font-size:9px;
+  letter-spacing:.15em;
+}
+
+.ics-footer-text{
+  max-width:440px;
+  margin:0;
+  color:#bdb4a7;
+  font-size:14px;
+  line-height:1.75;
+}
+
+.ics-footer-title{
+  margin:0 0 18px;
+  color:#d4a03a;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.14em;
+}
+
+.ics-footer-links{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:11px;
+}
+
+.ics-footer-links a{
+  color:#d6cec1;
+  text-decoration:none;
+  font-size:13px;
+  line-height:1.5;
+  transition:.2s ease;
+}
+
+.ics-footer-links a:hover{
+  color:#d4a03a;
+  transform:translateX(2px);
+}
+
+.ics-footer-quote{
+  margin:0 0 18px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:20px;
+  line-height:1.45;
+  color:#f6f1e7;
+}
+
+.ics-footer-peter{
+  color:#d4a03a;
+  font-size:13px;
+  font-weight:700;
+}
+
+.ics-footer-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  padding-top:24px;
+  border-top:1px solid rgba(212,160,58,.18);
+}
+
+.ics-footer-copy{
+  color:#81796e;
+  font-size:11px;
+}
+
+.ics-footer-legal{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.ics-footer-legal a{
+  color:#9f9689;
+  text-decoration:none;
+  font-size:11px;
+}
+
+.ics-footer-legal a:hover{
+  color:#d4a03a;
+}
+
+.ics-footer-up{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:38px;
+  height:38px;
+  border:1px solid rgba(212,160,58,.38);
+  border-radius:50%;
+  color:#d4a03a !important;
+  text-decoration:none;
+  font-size:18px !important;
+}
+
+@media(max-width:800px){
+
+  .ics-footer-inner{
+    padding:50px 22px 24px;
+  }
+
+  .ics-footer-top{
+    grid-template-columns:1fr 1fr;
+    gap:38px 28px;
+  }
+
+  .ics-footer-about{
+    grid-column:1 / -1;
+  }
+}
+
+@media(max-width:560px){
+
+  .ics-footer-top{
+    grid-template-columns:1fr;
+    gap:36px;
+  }
+
+  .ics-footer-about{
+    grid-column:auto;
+  }
+
+  .ics-footer-bottom{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .ics-footer-quote{
+    font-size:18px;
+  }
+}
+  
+
+/* ICS NEW BRAND HEADER · 2026-09-21 */
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none}
+.brand .ics-new-header-logo{width:96px!important;height:96px!important;object-fit:contain!important;border-radius:18px!important;overflow:hidden;display:block;animation:icsBrandReveal 4.2s cubic-bezier(.2,.8,.2,1) both;filter:drop-shadow(0 8px 18px rgba(212,160,58,.16))}
+.ics-new-header-name{font-family:Georgia,"Times New Roman",serif;font-size:12px;font-weight:600;line-height:1.15;letter-spacing:.16em;color:#8b7350;white-space:nowrap}
+@keyframes icsBrandReveal{0%{opacity:0;transform:translateY(26px) scale(.9);filter:blur(6px)}35%{opacity:1;filter:blur(0) drop-shadow(0 10px 24px rgba(212,160,58,.28))}68%{transform:translateY(-2px) scale(1.035)}100%{opacity:1;transform:translateY(0) scale(1);filter:drop-shadow(0 8px 18px rgba(212,160,58,.16))}}
+@media(max-width:900px){.brand .ics-new-header-logo{width:78px!important;height:78px!important}.brand{gap:8px}.ics-new-header-name{font-size:12px;font-weight:600;letter-spacing:.10em;margin-left:-3px}}
+@media(prefers-reduced-motion:reduce){.brand .ics-new-header-logo{animation:none}}
+
+
+/* ICS LIVING MEDITATION · permanent header animation */
+.ics-living-logo{position:relative;display:inline-block;width:96px;height:96px;border-radius:18px;overflow:hidden;isolation:isolate;flex:0 0 auto}
+.ics-living-logo>img{width:100%!important;height:100%!important;object-fit:cover!important;border-radius:18px!important;display:block!important;animation:icsLivingBreath 5.8s ease-in-out infinite!important}
+.ics-orbit{position:absolute;left:50%;top:43%;width:54%;aspect-ratio:1;border:1px solid rgba(232,187,93,.38);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;animation:icsOrbit 18s linear infinite}
+.ics-orbit:after{content:"";position:absolute;left:50%;top:-3px;width:5px;height:5px;border-radius:50%;background:#ffe7a0;box-shadow:0 0 8px rgba(255,222,130,.9)}
+.ics-orbit.o2{width:68%;opacity:.6;animation-duration:26s;animation-direction:reverse}
+.ics-core{position:absolute;left:50%;top:45%;width:18%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,248,215,.62),rgba(221,169,71,.2) 35%,transparent 72%);filter:blur(3px);pointer-events:none;animation:icsCore 3.5s ease-in-out infinite}
+.ics-wave{position:absolute;left:50%;top:45%;width:27%;aspect-ratio:1;border-radius:50%;border:1px solid rgba(255,218,130,.38);opacity:0;pointer-events:none;animation:icsWave 5.5s ease-out infinite}.ics-wave.w2{animation-delay:2.75s}
+.ics-rise{position:absolute;bottom:-4%;width:3px;height:3px;border-radius:50%;background:#ffe7a0;box-shadow:0 0 7px #e0ad4f;opacity:0;pointer-events:none;animation:icsRise 6s ease-in-out infinite}.ics-rise.p1{left:44%}.ics-rise.p2{left:50%;animation-delay:1.5s}.ics-rise.p3{left:56%;animation-delay:3s}
+.ics-crown{position:absolute;left:50%;top:14%;width:22%;height:22%;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(255,246,211,.72),rgba(220,170,70,.15) 40%,transparent 72%);filter:blur(5px);pointer-events:none;animation:icsCrown 5.8s ease-in-out infinite}
+@keyframes icsLivingBreath{0%,100%{transform:scale(.965);filter:brightness(.80) saturate(.92)}50%{transform:scale(1.055);filter:brightness(1.32) saturate(1.16) drop-shadow(0 0 18px rgba(218,170,73,.48))}}
+@keyframes icsOrbit{to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes icsCore{0%,100%{opacity:.3;transform:translate(-50%,-50%) scale(.82)}50%{opacity:.92;transform:translate(-50%,-50%) scale(1.2)}}
+@keyframes icsWave{0%{opacity:0;transform:translate(-50%,-50%) scale(.65)}18%{opacity:.55}100%{opacity:0;transform:translate(-50%,-50%) scale(2.45)}}
+@keyframes icsRise{0%{transform:translateY(0) scale(.5);opacity:0}15%{opacity:.85}72%{opacity:.45}100%{transform:translateY(-78px) scale(1.25);opacity:0}}
+@keyframes icsCrown{0%,100%{opacity:.2;transform:translateX(-50%) scale(.78)}50%{opacity:1;transform:translateX(-50%) scale(1.3)}}
+@media(max-width:900px){.ics-living-logo{width:78px;height:78px}}
+@media(prefers-reduced-motion:reduce){.ics-living-logo>img,.ics-orbit,.ics-core,.ics-wave,.ics-rise,.ics-crown{animation:none!important}}
+
+
+/* ICS zentrale Header-Logo-Animation */
+.ics-new-header-logo{
+  border-radius:12px;
+  animation:icsLogoBreath 3.4s ease-in-out infinite;
+  transform-origin:center;
+  will-change:transform,filter;
+}
+@keyframes icsLogoBreath{
+  0%,100%{transform:scale(1);filter:drop-shadow(0 0 0 rgba(212,160,58,0))}
+  50%{transform:scale(1.12);filter:drop-shadow(0 0 9px rgba(212,160,58,.48))}
+}
+@media (prefers-reduced-motion:reduce){.ics-new-header-logo{animation:none}}
+</style>
+</head>
+
+<body id="top">
+
+<header class="header">
+
+<a class="brand" href="https://innercodesystems.github.io/ics-auswertungstool/ics-startseite.html">
+  <span class="ics-new-header-name">INNER CODE SYSTEMS</span>
+</a>
+
+<nav class="nav">
+  <a href="https://innercodesystems.github.io/ics-auswertungstool/ics-startseite.html">START</a>
+  <a href="https://innercodesystems.github.io/ics-auswertungstool/inner.html">INNER</a>
+  <a href="https://innercodesystems.github.io/ics-auswertungstool/body.html">BODY</a>
+  <a href="https://innercodesystems.github.io/ics-auswertungstool/action.html">ACTION</a>
+  <a class="active" href="https://innercodesystems.github.io/ics-auswertungstool/reset.html">RESET</a>
+  <a href="https://innercodesystems.github.io/ics-auswertungstool/orientierung.html">ORIENTIERUNG</a>
+  <a href="https://innercodesystems.github.io/ics-auswertungstool/persoenliche-begleitung.html">BEGLEITUNG</a>
+  <a href="https://innercodesystems.github.io/ics-auswertungstool/ics-akademie.html">AKADEMIE</a>
+  <a href="https://app.innercodesystems.com/">MEIN ICS</a>
+</nav>
+
+<button class="menu-button" id="menuButton" aria-label="Menü öffnen">
+  ☰
+</button>
+
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="https://innercodesystems.github.io/ics-auswertungstool/ics-startseite.html">START</a>
+  <a href="https://innercodesystems.github.io/ics-auswertungstool/inner.html">INNER</a>
+  <a href="https://innercodesystems.github.io/ics-auswertungstool/body.html">BODY</a>
+  <a href="https://innercodesystems.github.io/ics-auswertungstool/action.html">ACTION</a>
+  <a class="active" href="https://innercodesystems.github.io/ics-auswertungstool/reset.html">RESET</a>
+  <a href="https://innercodesystems.github.io/ics-auswertungstool/orientierung.html">ORIENTIERUNG</a>
+  <a href="https://innercodesystems.github.io/ics-auswertungstool/persoenliche-begleitung.html">BEGLEITUNG</a>
+  <a href="https://innercodesystems.github.io/ics-auswertungstool/ics-akademie.html">AKADEMIE</a>
+  <a href="https://app.innercodesystems.com/">MEIN ICS</a>
+</div>
+
+
+<section class="hero">
+
+<div class="hero-inner">
+
+<div>
+
+<div class="kicker">04 · RESET · MUSTER & VERÄNDERUNG</div>
+
+<h1>
+Du musst das alte<br>
+Muster nicht zu Ende führen.
+</h1>
+
+<p class="hero-text">
+Manche Reaktionen laufen schneller ab, als du bewusst entscheiden kannst.
+RESET hilft dir, automatische Muster wahrzunehmen,
+zu unterbrechen und Schritt für Schritt eine neue Reaktion
+in deinem Alltag zu verankern.
+</p>
+
+</div>
+
+<div class="hero-side">
+
+<div class="hero-side-label">DEIN EINSTIEG</div>
+
+<h2>Was wiederholt sich bei dir immer wieder?</h2>
+
+<p>
+Der ICS System Check zeigt dir, ob ein wiederkehrendes Muster
+gerade dein stärkster Hebel ist – oder ob Klarheit,
+Energie, Handlung oder Orientierung zuerst Aufmerksamkeit brauchen.
+</p>
+
+<a class="button" href="https://innercodesystems.github.io/ics-auswertungstool/ICS_System_Check_V20_TESTMARKIERUNG.html?start=1&from=reset&return=https%3A%2F%2Fwww.innercodesystems.com%2Freset.html">
+System Check starten
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<main>
+
+<div class="content">
+
+<section class="section">
+
+<div class="section-kicker">WORAN DU RESET ERKENNST</div>
+
+<h2 class="section-title">
+Du weißt es eigentlich besser.
+Und trotzdem passiert wieder das Gleiche.
+</h2>
+
+<p class="section-intro">
+RESET beginnt dort, wo reine Erkenntnis nicht mehr reicht.
+Es geht um automatische Reaktionen, Stressmuster,
+Festhalten und neue Entscheidungen, die im Alltag noch nicht stabil bleiben.
+</p>
+
+<div class="grid four">
+
+<div class="card">
+<div class="card-label">01</div>
+<h3>Gleiches Muster</h3>
+<p>Du landest trotz guter Vorsätze immer wieder in derselben Reaktion oder Situation.</p>
+</div>
+
+<div class="card">
+<div class="card-label">02</div>
+<h3>Stressreaktion</h3>
+<p>Unter Druck übernimmt der alte Reflex, bevor du bewusst entscheiden kannst.</p>
+</div>
+
+<div class="card">
+<div class="card-label">03</div>
+<h3>Festhalten</h3>
+<p>Du merkst, dass etwas Kraft bindet, kannst es aber trotzdem nur schwer loslassen.</p>
+</div>
+
+<div class="card">
+<div class="card-label">04</div>
+<h3>Neue Entscheidung hält nicht</h3>
+<p>Du entscheidest dich für Veränderung – und einige Zeit später bist du wieder im Gewohnten.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<div class="section-kicker">DEIN GEGENPOL</div>
+
+<h2 class="section-title">
+Nicht gegen das Muster kämpfen.
+Eine neue Richtung aufbauen.
+</h2>
+
+<p class="section-intro">
+Ein wichtiger Teil von RESET ist der Gegenpol:
+nicht nur erkennen, was du nicht mehr möchtest,
+sondern bewusst eine neue innere und äußere Reaktion entwickeln.
+</p>
+
+<div class="grid four">
+
+<div class="card">
+<div class="card-label">GLEICHES MUSTER</div>
+<h3>Bewusst unterbrechen und neu wählen.</h3>
+<p>Du musst die alte Reaktion nicht automatisch bis zum Ende durchlaufen.</p>
+</div>
+
+<div class="card">
+<div class="card-label">STRESSREAKTION</div>
+<h3>Erst regulieren. Dann bewusst reagieren.</h3>
+<p>Zwischen Auslöser und Reaktion darf wieder Raum entstehen.</p>
+</div>
+
+<div class="card">
+<div class="card-label">FESTHALTEN</div>
+<h3>Loslassen und neuen Raum zulassen.</h3>
+<p>Du darfst etwas gehen lassen, ohne schon jede Antwort für das Danach zu kennen.</p>
+</div>
+
+<div class="card">
+<div class="card-label">NEUE ENTSCHEIDUNG</div>
+<h3>Klein wiederholen und dadurch verankern.</h3>
+<p>Veränderung muss nicht sofort perfekt sein. Sie darf durch Wiederholung vertrauter werden.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<div class="section-kicker">DIREKT WEITERGEHEN</div>
+
+<h2 class="section-title">
+Erkennen. Unterbrechen.
+Neu wählen.
+</h2>
+
+<p class="section-intro">
+Du kannst RESET unterschiedlich tief nutzen:
+vom ersten System Check bis zur gezielten Arbeit mit
+wiederkehrenden Mustern und Blockaden.
+</p>
+
+<div class="grid">
+
+<a class="card" href="https://innercodesystems.github.io/ics-auswertungstool/ICS_System_Check_V20_TESTMARKIERUNG.html?start=1&from=reset&return=https%3A%2F%2Fwww.innercodesystems.com%2Freset.html">
+<div class="card-label">ICS SYSTEM CHECK</div>
+<h3>Deinen stärksten Hebel erkennen</h3>
+<p>Finde heraus, ob RESET aktuell tatsächlich der Bereich ist, der am meisten Veränderung ermöglicht.</p>
+<span class="card-link">System Check starten →</span>
+</a>
+
+<a class="card" href="https://innercodesystems.com/7-tage-reset">
+<div class="card-label">7-TAGE RESET</div>
+<h3>Veränderung im Alltag beginnen</h3>
+<p>Ein klarer Einstieg, um Wahrnehmung, neue Entscheidungen und konkrete Schritte miteinander zu verbinden.</p>
+<span class="card-link">7-Tage RESET ansehen →</span>
+</a>
+
+<a class="card" href="https://innercodesystems.github.io/ics-auswertungstool/glaubenssatz-kompass.html">
+<div class="card-label">GLAUBENSSATZ-KOMPASS</div>
+<h3>Den Code hinter dem Muster erkennen</h3>
+<p>Entdecke, welche inneren Überzeugungen hinter wiederkehrenden Reaktionen wirken und welche neue Ausrichtung möglich wird.</p>
+<span class="card-link">Glaubenssatz-Kompass öffnen →</span>
+</a>
+
+<a class="card" href="https://innercodesystems.github.io/ics-auswertungstool/ics-gestaltungs-codefinder.html">
+<div class="card-label">GESTALTUNGS-CODEFINDER</div>
+<h3>Vom alten Muster in eine neue Richtung</h3>
+<p>Übersetze einen Gedanken oder ein wiederkehrendes Muster aus dem Überlebensmodus in eine bewusste Gestaltungsrichtung.</p>
+<span class="card-link">Gestaltungs-Codefinder öffnen →</span>
+</a>
+  
+</div>
+
+</section>
+
+</div>
+
+
+<section class="dark">
+
+<div class="content">
+
+<div class="section-kicker">TIEFER GEHEN</div>
+
+<h2 class="section-title">
+Wenn du das Muster kennst,
+aber noch nicht daraus herauskommst.
+</h2>
+
+<p class="section-intro">
+Wiederkehrende Muster sind selten nur ein Wissensproblem.
+Manchmal braucht es einen tieferen Blick darauf,
+was die alte Reaktion stabil hält – und was stattdessen entstehen soll.
+</p>
+
+<div class="grid">
+
+<a class="card" href="https://innercodesystems.com/blockadenloeser-report">
+<div class="card-label">BLOCKADENLÖSER</div>
+<h3>Die Blockade hinter dem Muster verstehen</h3>
+<p>Erkenne tieferliegende Zusammenhänge und gewinne eine neue Perspektive auf das, was dich bisher zurückhält.</p>
+<span class="card-link">Blockadenlöser ansehen →</span>
+</a>
+
+<a class="card" href="https://innercodesystems.github.io/ics-auswertungstool/ics-methode.html">
+<div class="card-label">ICS METHODE</div>
+<h3>Verstehen, was Veränderung wirklich braucht</h3>
+<p>Entdecke, wie INNER, BODY, ACTION, RESET und ORIENTIERUNG zusammenspielen und warum Veränderung mehr ist als nur eine neue Entscheidung.</p>
+<span class="card-link">ICS Methode entdecken →</span>
+</a>
+
+<a class="card" href="https://innercodesystems.github.io/ics-auswertungstool/persoenliche-begleitung.html">
+<div class="card-label">PERSÖNLICHE BEGLEITUNG</div>
+<h3>Das Muster gemeinsam verändern</h3>
+<p>Wenn du erkennst, was sich wiederholt, aber allein noch nicht nachhaltig aus dem alten Muster herauskommst.</p>
+<span class="card-link">Persönliche Begleitung ansehen →</span>
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<div class="content">
+
+<section class="section">
+
+<div class="section-kicker">WEBSITE + APP</div>
+
+<div class="app-box">
+
+<div>
+
+<h3>Aus einer neuen Entscheidung wird ein neues Muster.</h3>
+
+<p>
+Die Website hilft dir, wiederkehrende Muster zu erkennen
+und einen passenden Einstieg zu finden.
+In Mein ICS kann daraus später ein sichtbarer Entwicklungsverlauf entstehen.
+</p>
+
+<a class="button" href="https://app.innercodesystems.com/">
+Zu Mein ICS
+</a>
+
+</div>
+
+<div class="app-list">
+<div class="app-item">Muster erkennen</div>
+<div class="app-item">Persönlichen Gegenpol entwickeln</div>
+<div class="app-item">Neue Reaktion festhalten</div>
+<div class="app-item">Journal & Entwicklung</div>
+<div class="app-item">Passende nächste Schritte</div>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<div class="section-kicker">DIE FÜNF ICS WELTEN</div>
+
+<h2 class="section-title">
+Muster entstehen nicht isoliert.
+</h2>
+
+<p class="section-intro">
+RESET verbindet sich mit deiner Klarheit, deinem Körper,
+deiner Umsetzung und deiner Lebensrichtung.
+Deshalb betrachtet ICS Veränderung immer als Gesamtsystem.
+</p>
+
+<div class="worlds">
+
+<a class="world" href="https://innercodesystems.github.io/ics-auswertungstool/inner.html">
+<strong>INNER</strong>
+<span>Klarheit</span>
+</a>
+
+<a class="world" href="https://innercodesystems.github.io/ics-auswertungstool/body.html">
+<strong>BODY</strong>
+<span>Energie</span>
+</a>
+
+<a class="world" href="https://innercodesystems.github.io/ics-auswertungstool/action.html">
+<strong>ACTION</strong>
+<span>Umsetzung</span>
+</a>
+
+<a class="world current" href="https://innercodesystems.github.io/ics-auswertungstool/reset.html">
+<strong>RESET</strong>
+<span>Muster</span>
+</a>
+
+<a class="world" href="https://innercodesystems.github.io/ics-auswertungstool/orientierung.html">
+<strong>ORIENTIERUNG</strong>
+<span>Richtung</span>
+</a>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<div class="final">
+
+<div class="section-kicker">PERSÖNLICHE BEGLEITUNG</div>
+
+<h2>
+Wenn du nicht mehr nur verstehen willst,
+warum es passiert.
+</h2>
+
+<p>
+Wenn du ein Muster schon lange kennst und trotzdem immer wieder
+hineingerätst, können wir gemeinsam anschauen,
+was es stabil hält und welcher neue Gegenpol für dich wirklich tragfähig ist.
+</p>
+
+<a class="button"
+href="https://wa.me/491717335441?text=Hallo%20Peter%2C%20ich%20komme%20%C3%BCber%20die%20ICS%20RESET-Seite%20und%20m%C3%B6chte%20ein%20wiederkehrendes%20Muster%20pers%C3%B6nlich%20mit%20dir%20anschauen.">
+Persönlich mit Peter klären
+</a>
+
+</div>
+
+</section>
+
+</div>
+
+</main>
+
+<!-- =========================================
+     ICS FOOTER
+========================================= -->
+
+<footer class="ics-footer">
+
+  <div class="ics-footer-inner">
+
+    <div class="ics-footer-top">
+
+      <!-- MARKE -->
+      <div class="ics-footer-about">
+
+        <div class="ics-footer-brand" style="display:block;">
+          <div class="ics-footer-name">ICS</div>
+          <div class="ics-footer-sub">INNER CODE SYSTEMS</div>
+        </div>
+
+        <p class="ics-footer-text">
+          Inner Code Systems verbindet Klarheit, Körperwahrnehmung,
+          Handlung, Veränderung und Orientierung
+          zu einem persönlichen Entwicklungsweg.
+        </p>
+
+      </div>
+
+
+      <!-- DIE 5 WELTEN -->
+      <div>
+
+        <div class="ics-footer-title">
+          DIE 5 WELTEN
+        </div>
+
+        <nav class="ics-footer-links">
+
+          <a href="https://innercodesystems.github.io/ics-auswertungstool/inner.html">
+            <strong>INNER</strong> · Klarheit
+          </a>
+
+          <a href="https://innercodesystems.github.io/ics-auswertungstool/body.html">
+            <strong>BODY</strong> · Energie
+          </a>
+
+          <a href="https://innercodesystems.github.io/ics-auswertungstool/action.html">
+            <strong>ACTION</strong> · Umsetzung
+          </a>
+
+          <a href="https://innercodesystems.github.io/ics-auswertungstool/reset.html">
+            <strong>RESET</strong> · Muster
+          </a>
+
+          <a href="https://innercodesystems.github.io/ics-auswertungstool/orientierung.html">
+            <strong>ORIENTIERUNG</strong> · Richtung
+          </a>
+
+        </nav>
+
+      </div>
+
+
+      <!-- LEITSATZ / KONTAKT -->
+      <div>
+
+        <p class="ics-footer-quote">
+          „Verstehen. Spüren. Handeln. Integrieren.“
+        </p>
+
+        <div class="ics-footer-peter">
+          Peter Wicklein · Inner Code Systems
+        </div>
+
+        <nav class="ics-footer-links" style="margin-top:20px;">
+
+          <a href="https://app.innercodesystems.com/">
+            Mein ICS →
+          </a>
+
+          <a href="https://innercodesystems.github.io/ics-auswertungstool/tool-bibliothek.html">
+            Tool-Bibliothek →
+          </a>
+
+          <a href="https://innercodesystems.github.io/ics-auswertungstool/persoenliche-begleitung.html">
+            Persönliche Begleitung →
+          </a>
+
+          <a href="https://wa.me/491717335441?text=Hallo%20Peter%2C%20ich%20komme%20%C3%BCber%20Inner%20Code%20Systems%20und%20m%C3%B6chte%20gerne%20mit%20dir%20Kontakt%20aufnehmen.">
+            Kontakt über WhatsApp →
+          </a>
+
+        </nav>
+
+      </div>
+
+    </div>
+
+
+    <!-- UNTERE ZEILE -->
+    <div class="ics-footer-bottom">
+
+      <div class="ics-footer-copy">
+        © 2026 Inner Code Systems · Peter Wicklein
+      </div>
+
+      <div class="ics-footer-legal">
+
+        <a href="https://www.innercodesystems.com/impressum/">
+          Impressum
+        </a>
+
+        <a href="https://www.innercodesystems.com/datenschutz/">
+          Datenschutz
+        </a>
+
+        <a href="#top" class="ics-footer-up" aria-label="Nach oben">
+          ↑
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</footer>
+  
+<script>
+document.querySelectorAll('a[href^="https://"], a[href^="http://"]').forEach(function(link){
+
+  const url = new URL(link.href);
+
+  const isNewICSWebsite =
+    url.hostname === "innercodesystems.github.io" &&
+    url.pathname.startsWith("/ics-auswertungstool/");
+
+  if(isNewICSWebsite){
+    link.removeAttribute("target");
+    link.removeAttribute("rel");
+  }else{
+    link.setAttribute("target","_blank");
+    link.setAttribute("rel","noopener noreferrer");
+  }
+
+});
+</script>
+
+<script src="https://innercodesystems.github.io/ics-auswertungstool/ics-mobile-navigation.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+  const button = document.getElementById("menuButton");
+  const menu = document.getElementById("mobileMenu");
+
+  if(!button || !menu) return;
+
+  button.addEventListener("click", function(){
+    menu.classList.toggle("open");
+    button.textContent = menu.classList.contains("open") ? "×" : "☰";
+  });
+
+  menu.querySelectorAll("a").forEach(function(link){
+    link.addEventListener("click", function(){
+      menu.classList.remove("open");
+      button.textContent = "☰";
+    });
+  });
+
+});
+</script>
+  
+<script id="ics-origin-return-v1">
+document.addEventListener("click",function(e){
+  const a=e.target.closest('a[href*="ICS_System_Check_V20_TESTMARKIERUNG.html"]');
+  if(!a)return;
+  try{
+    const u=new URL(a.href);
+    u.searchParams.set("return",location.href);
+    a.href=u.toString();
+  }catch(err){}
+});
+</script>
+<script>
+(function(){
+  const p=new URLSearchParams(location.search);
+  if(p.get('from')!=='inner-code') return;
+  const a=document.createElement('a');
+  a.href='inner-code.html?restore=1';
+  a.textContent='← Zurück zu meinem INNER CODE';
+  a.setAttribute('aria-label','Zurück zu meinem INNER CODE');
+  a.style.cssText='position:fixed;left:18px;bottom:20px;z-index:9999;background:#171612;color:#f6f1e7;border:1px solid #b8924f;border-radius:999px;padding:12px 16px;text-decoration:none;font:700 14px/1.2 Arial,sans-serif;box-shadow:0 8px 28px rgba(0,0,0,.28)';
+  document.body.appendChild(a);
+})();
+</script>
+</body>
+</html>
