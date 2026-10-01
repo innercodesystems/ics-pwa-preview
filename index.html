@@ -90,6 +90,44 @@
     page-break-inside:avoid!important;
   }
 }
+/* PRINT FLOW PASS 2 · compact variable-length sections only */
+@media print{
+  /* Houses: keep the complete 12-house grid compact so a small remainder does not create a thin page. */
+  #houseGrid{
+    gap:2mm!important;
+    margin-top:2.5mm!important;
+  }
+  #houseGrid .code-chip{
+    padding:2.2mm 3mm!important;
+    border-radius:2.5mm!important;
+    line-height:1.18!important;
+    break-inside:avoid-page!important;
+    page-break-inside:avoid!important;
+  }
+  #houseGrid .code-chip b{
+    font-size:8.2pt!important;
+    margin-bottom:.7mm!important;
+  }
+
+  /* Aspect cards: reduce print-only vertical overhead enough to avoid a single orphan aspect page.
+     Online cards remain unchanged and every individual aspect stays intact. */
+  #aspectCodes .reflection{
+    padding:2.5mm 3mm!important;
+    margin:1.5mm 0!important;
+    line-height:1.28!important;
+    font-size:8.8pt!important;
+    break-inside:avoid-page!important;
+    page-break-inside:avoid!important;
+  }
+  #aspectCodes .reflection p{
+    margin:1mm 0!important;
+  }
+  #aspectCodes .reflection .deep-action{
+    padding:2mm 2.5mm!important;
+    margin:1.2mm 0 0!important;
+    line-height:1.25!important;
+  }
+}
 /* MOBILE FORM FIX · keep Android autofill from visually covering fields */
 @media (max-width:700px){
   #s2 input,#s2 select{
