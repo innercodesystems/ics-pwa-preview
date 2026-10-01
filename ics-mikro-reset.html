@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1a1815">
+<title>ICS Mikro-RESET</title>
+<style>
+:root{--bg:#1a1815;--card:#24211c;--gold:#b8924f;--cream:#f6f1e7;--muted:#bdb5a7;--line:#40392f}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 50% 0,#342b1f 0,#1a1815 42%,#11100e 100%);color:var(--cream);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
+.wrap{max-width:720px;margin:auto;padding:22px 18px 40px}.brand{text-align:center;letter-spacing:.22em;font-size:12px;color:var(--gold);margin:8px 0}.logo{width:58px;height:58px;border:1px solid var(--gold);border-radius:50%;margin:12px auto;display:grid;place-items:center;font-size:27px;box-shadow:0 0 35px #b8924f33}
+h1{text-align:center;font-family:Georgia,serif;font-weight:400;font-size:38px;margin:6px 0 4px}.sub{text-align:center;color:var(--muted);margin:0 auto 26px;max-width:520px;line-height:1.5}
+.card{background:#24211ce8;border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 20px 60px #0006}.step{display:none}.step.active{display:block;animation:fade .35s ease}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+.kicker{color:var(--gold);font-size:12px;letter-spacing:.18em;text-transform:uppercase}h2{font-family:Georgia,serif;font-weight:400;font-size:27px;margin:8px 0 10px}.lead{color:#ddd5c8;line-height:1.55}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}.choice,.btn{border:1px solid var(--line);background:#1d1b17;color:var(--cream);padding:14px;border-radius:14px;font-size:15px;cursor:pointer}.choice:hover,.choice.on{border-color:var(--gold);background:#2d281f}.btn{width:100%;background:var(--gold);color:#17130d;border:0;font-weight:700;margin-top:14px}.ghost{background:transparent;color:var(--muted);border:1px solid var(--line)}
+textarea,input{width:100%;background:#171512;color:var(--cream);border:1px solid var(--line);border-radius:14px;padding:14px;font:inherit;outline:none}textarea{min-height:95px;resize:vertical}textarea:focus,input:focus{border-color:var(--gold)}
+.breathe{width:150px;height:150px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;margin:24px auto;background:#b8924f10;box-shadow:0 0 45px #b8924f22;transition:transform 4s ease}.breathe.go{transform:scale(1.22)}
+.timer{text-align:center;font-family:Georgia,serif;font-size:46px;color:var(--gold);margin:10px}.quote{text-align:center;font-family:Georgia,serif;font-size:23px;line-height:1.45;padding:18px 5px}.micro{background:#171512;border-left:2px solid var(--gold);padding:16px;border-radius:10px;margin:15px 0;line-height:1.5}.progress{height:3px;background:#302b24;margin:0 0 22px;border-radius:9px;overflow:hidden}.bar{height:100%;width:12%;background:var(--gold);transition:.3s}
+.handoff{display:none;margin:0 0 18px;padding:16px;border:1px solid #b8924f88;border-radius:16px;background:#b8924f0d}.handoff b{display:block;color:var(--gold);font-size:12px;letter-spacing:.12em;margin-bottom:7px}.handoff p{margin:0;color:#ddd5c8;line-height:1.5}.small{text-align:center;color:#817a70;font-size:12px;margin-top:18px}.result strong{color:var(--gold)}@media(max-width:520px){.grid{grid-template-columns:1fr}h1{font-size:33px}.card{padding:20px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <div class="brand">INNER CODE SYSTEMS</div>
+ <div class="logo">✦</div>
+ <h1>Mikro-RESET</h1>
+ <p class="sub">Vom automatischen Reagieren zurück ins bewusste Gestalten. Ein kurzer Zustandswechsel für genau diesen Moment.</p>
+ <div class="card">
+  <div class="progress"><div class="bar" id="bar"></div></div>
+<div id="innerCodeReturn" data-inner-return="1" style="display:none;margin:0 0 16px 0;"><a href="inner-code.html?restore=1" style="display:block;padding:12px 14px;border:1px solid #b8924f;border-radius:12px;color:#bdb5a7;text-decoration:none;font-size:13px;line-height:1.4;background:#b8924f0d;"><strong style="color:#d4a03a;">← Zurück zu meinem INNER CODE</strong><br><span style="font-size:11px;">Zurück zu deiner persönlichen Auswertung</span></a></div>
+<div id="standardReturnLinks" style="
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+  margin-bottom:20px;
+">
+
+  <a
+    href="https://innercodesystems.com/tool-bibliothek.html#tools"
+    style="
+      display:block;
+      padding:12px 14px;
+      border:1px solid #4a443a;
+      border-radius:12px;
+      color:#bdb5a7;
+      text-decoration:none;
+      font-size:13px;
+      line-height:1.4;
+    "
+  >
+    <strong style="color:#f6f1e7;">
+      ← Zurück zur Tool-Bibliothek
+    </strong><br>
+    <span style="font-size:11px;">
+      Alle ICS Tools auf der Webseite
+    </span>
+  </a>
+
+  <a
+    href="https://app.innercodesystems.com/"
+    style="
+      display:block;
+      padding:12px 14px;
+      border:1px solid #b8924f;
+      border-radius:12px;
+      color:#bdb5a7;
+      text-decoration:none;
+      font-size:13px;
+      line-height:1.4;
+      background:#b8924f0d;
+    "
+  >
+    <strong style="color:#d4a03a;">
+      ← Zurück zu Mein ICS
+    </strong><br>
+    <span style="font-size:11px;">
+      Zurück in deinen persönlichen ICS Bereich
+    </span>
+  </a>
+
+</div>
+  
+<div class="handoff" id="gegenpolHandoff"><b>AUS DEINEM GEGENPOL</b><p id="gegenpolHandoffText"></p><p id="gegenpolFocus" style="margin-top:10px;color:#f6f1e7;font-weight:700"></p></div>
+<section class="step active">
+   <div class="kicker">R · Realisieren</div><h2>Was läuft gerade in dir?</h2>
+   <p class="lead">Nicht lösen. Nicht bewerten. Nur erkennen.</p>
+   <div class="grid" id="feelings">
+    <button class="choice">Ich zweifle</button><button class="choice">Ich bin angespannt</button>
+    <button class="choice">Ich bin verletzt</button><button class="choice">Ich drehe mich im Kreis</button>
+    <button class="choice">Ich habe Angst</button><button class="choice">Ich fühle Druck</button>
+    <button class="choice">Ich bin energielos</button><button class="choice">Etwas anderes</button>
+   </div>
+   <button class="btn" onclick="next()">Ich nehme es wahr</button>
+  </section>
+
+  <section class="step">
+   <div class="kicker">E · Erkennen</div><h2>Das ist ein Zustand. Nicht deine Identität.</h2>
+   <p class="lead">Spüre für einen Augenblick, wo dieser Zustand im Körper sitzt. Du musst ihn nicht wegmachen.</p>
+   <div class="breathe" id="breath">ATME</div>
+   <p id="breathText" class="quote">Langsam einatmen.</p>
+   <button class="btn" id="breathStart" onclick="breathe()">3 Atemzüge starten</button>
+   <button class="btn" id="breathNext" onclick="next()" style="display:none;">Weiter</button>
+  </section>
+
+  <section class="step">
+   <div class="kicker">S · Selbst wahrnehmen</div><h2>Was brauchst du stattdessen?</h2>
+   <p class="lead">Wähle nicht das Gegenteil aus Trotz. Wähle den Zustand, aus dem du jetzt leben möchtest.</p>
+   <div class="grid" id="states">
+    <button class="choice">Ruhe</button><button class="choice">Klarheit</button>
+    <button class="choice">Vertrauen</button><button class="choice">Mut</button>
+    <button class="choice">Leichtigkeit</button><button class="choice">Verbundenheit</button>
+    <button class="choice">Kraft</button><button class="choice">Entschlossenheit</button>
+   </div>
+   <input id="ownState" placeholder="Oder dein eigener neuer Zustand …">
+   <button class="btn" onclick="next()">Diesen Zustand wähle ich</button>
+  </section>
+
+  <section class="step">
+   <div class="kicker">E · Entscheiden</div><h2>Sieh einen einzigen Moment.</h2>
+   <p class="lead">Nicht den ganzen Weg. Stell dir eine kurze reale Szene vor, in der du bereits aus deinem gewählten Zustand handelst.</p>
+   <div class="timer" id="timer">30</div>
+   <div class="quote" id="visionText">Wie stehst du? Wie atmest du? Was tust oder sagst du anders?</div>
+   <button class="btn" id="timerBtn" onclick="startTimer()">30 Sekunden erleben</button>
+  </section>
+
+  <section class="step">
+   <div class="kicker">T · Transformieren</div><h2>Mach den neuen Code real.</h2>
+   <p class="lead">Eine Vorstellung verändert noch keinen Alltag. Welche kleine Handlung beweist deinem System jetzt, dass du neu gewählt hast?</p>
+   <textarea id="action" placeholder="Meine nächste kleine Handlung ist …"></textarea>
+   <button class="btn" onclick="finish()">Ich setze den neuen Code</button>
+  </section>
+
+  <section class="step result">
+   <div class="kicker">Gestaltungsmodus</div><h2>Dein Mikro-RESET ist gesetzt.</h2>
+   <div class="micro" id="summary"></div>
+   <p class="quote">Nicht warten, bis du dich anders fühlst.<br><strong>Handle einmal aus dem neuen Zustand.</strong></p>
+   <button class="btn" onclick="saveToMeinIcs()">In Mein ICS speichern</button>
+   <button class="btn ghost" onclick="backToInnerCode()">Zurück zu meinem INNER CODE</button>
+   <button class="btn ghost" onclick="restart()">Neuen Mikro-RESET starten</button>
+  </section>
+ </div>
+ <div class="small">INNER CODE SYSTEMS · Mikro-RESET · Eigenständige Reflexionsübung<br>Kein Ersatz für medizinische oder psychotherapeutische Behandlung.</div>
+</div>
+<script>
+let idx=0, oldState="", newState="";
+const steps=[...document.querySelectorAll('.step')], bar=document.getElementById('bar');
+function selectGroup(id, setter){
+ document.querySelectorAll('#'+id+' .choice').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#'+id+' .choice').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); setter(b.textContent);
+ });
+}
+selectGroup('feelings',v=>oldState=v); selectGroup('states',v=>newState=v);
+let gegenpolStart=false, gegenpolQuality='';
+(function(){try{let qs=new URLSearchParams(location.search),fromG=qs.get('from')==='gegenpol',r=JSON.parse(localStorage.getItem('icsGegenpolResult')||'{}');if(fromG&&r.pattern){gegenpolStart=true;oldState=r.pattern;newState=r.quality||'';gegenpolQuality=newState;let ir=document.getElementById('innerCodeReturn');if(ir)ir.style.display='none';let sr=document.getElementById('standardReturnLinks');if(sr){sr.style.display='block';sr.innerHTML='<a href="mein-ics.html?from=gegenpol" style="display:block;padding:12px 14px;border:1px solid #b8924f;border-radius:12px;color:#bdb5a7;text-decoration:none;font-size:13px;line-height:1.4;background:#b8924f0d;"><strong style="color:#d4a03a;">← Zurück zu Mein ICS</strong><br><span style="font-size:11px;">Zurück zu deinem aktuellen Gegenpol</span></a>'}let h=document.getElementById('gegenpolHandoff');h.style.display='block';document.getElementById('gegenpolHandoffText').innerHTML='<strong>Dein erkanntes Muster:</strong> '+escapeHtml(r.pattern)+'<br><strong>Dein gewählter Gegenpol:</strong> '+escapeHtml(r.quality||'bewusste neue Qualität');let gf=document.getElementById('gegenpolFocus');if(gf)gf.textContent='Dieser Mikro-RESET führt dich jetzt gezielt in '+(r.quality||'deinen neuen Zustand')+'.';let own=document.getElementById('ownState');own.value=r.quality||'';document.querySelectorAll('#states .choice').forEach(b=>{if(b.textContent.trim().toLowerCase()===(r.quality||'').trim().toLowerCase())b.classList.add('on')});idx=1;}}catch(e){}})();
+function show(){steps.forEach((s,i)=>s.classList.toggle('active',i===idx));bar.style.width=((idx+1)/steps.length*100)+'%';personalizeGegenpolStep();window.scrollTo({top:0,behavior:'smooth'})}
+function personalizeGegenpolStep(){if(!gegenpolStart||!gegenpolQuality)return;let q=gegenpolQuality.trim();if(idx===1){let h=steps[1].querySelector('h2'),p=steps[1].querySelector('.lead'),tx=document.getElementById('breathText');if(h)h.textContent='Schaffe Raum für '+q+'.';if(p)p.textContent='Dein altes Muster ist gerade nur ein Zustand. Mit jedem Atemzug öffnest du bewusst Raum für '+q+'.';if(tx&&document.getElementById('breathStart').style.display!=='none')tx.textContent='Atme ein – und öffne Raum für '+q+'.'}if(idx===2){let h=steps[2].querySelector('h2'),p=steps[2].querySelector('.lead'),grid=document.getElementById('states'),own=document.getElementById('ownState'),btn=steps[2].querySelector('.btn');if(h)h.textContent=q+' ist bereits gewählt.';if(p)p.textContent='Du musst nicht noch einmal wählen. Spüre kurz, wie sich '+q+' für dich anfühlt.';if(grid)grid.style.display='none';if(own){own.value=q;own.style.display='none'};if(btn)btn.textContent='Weiter mit '+q;newState=q}if(idx===3){let h=steps[3].querySelector('h2'),p=steps[3].querySelector('.lead'),v=document.getElementById('visionText');if(h)h.textContent='Erlebe '+q+' für einen Moment.';if(p)p.textContent='Stell dir eine konkrete Szene vor, in der du bereits aus '+q+' handelst.';if(v)v.textContent='Wie atmest du? Wie stehst du? Was tust oder sagst du aus '+q+' anders?'}if(idx===4){let h=steps[4].querySelector('h2'),p=steps[4].querySelector('.lead'),a=document.getElementById('action');if(h)h.textContent='Mach '+q+' jetzt sichtbar.';if(p)p.textContent='Welche kleine Handlung beweist heute, dass du '+q+' wirklich gewählt hast?';if(a&&!a.value)a.placeholder='Meine konkrete Handlung aus '+q+' ist …'}}
+function next(){if(idx===2 && document.getElementById('ownState').value.trim())newState=document.getElementById('ownState').value.trim(); if(idx<steps.length-1)idx++;show()}
+function breathe(){
+  let n=0,
+      el=document.getElementById('breath'),
+      tx=document.getElementById('breathText'),
+      nextBtn=document.getElementById('breathNext');
+
+  nextBtn.style.display='none';
+  document.getElementById('breathStart').style.display='none';
+  function cycle(){
+    if(n>=3){
+      tx.textContent=gegenpolStart&&gegenpolQuality?"Spüre "+gegenpolQuality+". Du hast gerade bewusst einen neuen Zustand gewählt.":"Spüre: Du hast Raum zwischen Reiz und Reaktion geschaffen.";
+      el.classList.remove('go');
+      nextBtn.style.display='block';
+      return;
+    }
+
+    tx.textContent=gegenpolStart&&gegenpolQuality?"Einatmen – Raum für "+gegenpolQuality+" …":"Einatmen …";
+    el.classList.add('go');
+
+    setTimeout(()=>{
+      tx.textContent=gegenpolStart&&gegenpolQuality?"Ausatmen – altes Muster lockern …":"Ausatmen …";
+      el.classList.remove('go');
+
+      setTimeout(()=>{
+        n++;
+        cycle();
+      },4000);
+
+    },4000);
+  }
+
+  cycle();
+}
+function startTimer(){
+ let t=30, el=document.getElementById('timer'), btn=document.getElementById('timerBtn');btn.disabled=true;
+ let it=setInterval(()=>{t--;el.textContent=t;if(t<=0){clearInterval(it);el.textContent="✓";btn.disabled=false;btn.textContent="Diesen Moment verankern";btn.onclick=next}},1000)
+}
+function finish(){
+ let a=document.getElementById('action').value.trim()||"Ich wähle jetzt eine konkrete kleine Handlung.";
+ window.icsMicroResetResult={
+  pattern:oldState||"mein bisheriger Zustand",
+  quality:newState||"bewusstes Gestalten",
+  action:a,
+  completedAt:new Date().toISOString()
+ };
+ document.getElementById('summary').innerHTML=
+ "<strong>Erkannt:</strong> "+escapeHtml(window.icsMicroResetResult.pattern)+"<br><br><strong>Neu gewählt:</strong> "+escapeHtml(window.icsMicroResetResult.quality)+"<br><br><strong>Meine Handlung:</strong> "+escapeHtml(a);
+ next()
+}
+function saveToMeinIcs(){
+ try{
+  let r=window.icsMicroResetResult;
+  if(!r)return;
+  localStorage.setItem('icsMicroResetResult',JSON.stringify(r));
+  let g={pattern:r.pattern,quality:r.quality,sentence:"Ich erkenne mein altes Muster – und wähle jetzt "+r.quality+".",action:r.action,savedAt:Date.now()};
+  localStorage.setItem('icsGegenpolResult',JSON.stringify(g));
+  window.open('mein-ics.html?from=mikro-reset&v=202610011000','_blank','noopener');
+ }catch(e){}
+}
+function backToInnerCode(){location.href='inner-code.html?restore=1'}
+function escapeHtml(s){return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function restart(){idx=0;oldState="";newState="";document.querySelectorAll('.choice').forEach(x=>x.classList.remove('on'));document.getElementById('action').value="";document.getElementById('ownState').value="";document.getElementById('timer').textContent="30";let b=document.getElementById('timerBtn');b.textContent="30 Sekunden erleben";b.onclick=startTimer;show()}
+show();
+if(gegenpolStart){
+  document.querySelectorAll('[data-inner-return="1"]').forEach(function(ir){ir.remove()});
+  var sr=document.getElementById('standardReturnLinks');
+  if(sr){sr.style.setProperty('display','block','important');sr.innerHTML='<a href="inner-code.html?restore=1" style="display:block;padding:12px 14px;border:1px solid #b8924f;border-radius:12px;color:#bdb5a7;text-decoration:none;font-size:13px;line-height:1.4;background:#b8924f0d;"><strong style="color:#d4a03a;">← Zurück zu meinem INNER CODE</strong><br><span style="font-size:11px;">Mikro-RESET verlassen und zurück zur persönlichen Auswertung</span></a>'}
+  setTimeout(()=>{document.getElementById('gegenpolHandoff')?.scrollIntoView({behavior:'smooth',block:'start'})},120)
+}
+</script>
+<script src="./ics-navigation-standard.js?v=20260930-nav1"></script>\n<script>(function(){try{var fromInner=new URLSearchParams(location.search).get('from')==='inner-code';var hasInner=!!localStorage.getItem('icsInnerCodeState');if(fromInner||hasInner){var el=document.getElementById('innerCodeReturn');if(el)el.style.display='block'}}catch(e){}})();</script>
+</body>
+</html>
