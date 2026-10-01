@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mein ICS — Inner Code Systems</title>
+<style>
+  :root {
+    --cream: #f6f1e7;
+    --cream-dark: #ede5d5;
+    --black: #1a1815;
+    --gold: #b8924f;
+    --gold-light: #dec8a0;
+    --gold-soft: #f0e3ca;
+    --gray: #605a52;
+    --white: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--black);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.55;
+  }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 32px 20px 80px; }
+  header.top {
+    text-align: center;
+    padding: 12px 0 24px;
+    border-bottom: 1px solid var(--gold-light);
+    margin-bottom: 28px;
+  }
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 28px;
+    margin: 10px 0 6px;
+    font-weight: 700;
+  }
+  .sub { font-size: 15px; color: var(--gray); margin: 0; }
+  section.card {
+    background: var(--white);
+    border: 1px solid var(--gold-light);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  section.card h2 {
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 14px;
+    font-weight: 700;
+  }
+  .zeile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--cream-dark);
+    font-size: 15px;
+  }
+  .zeile:last-child { border-bottom: none; }
+  .zeile .wert { color: var(--gold); font-weight: 600; }
+  .gegenpol-neu {display:none;background:#1a1815;color:#f6f1e7;border:1px solid #b8924f;border-radius:16px;padding:20px;margin-bottom:16px}.gegenpol-neu h2{font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#b8924f;margin:0 0 14px}.gegenpol-neu .gp{padding:10px 0;border-bottom:1px solid #40392f}.gegenpol-neu .gp:last-child{border-bottom:0}.gegenpol-neu b{display:block;color:#b8924f;font-size:11px;letter-spacing:1px;margin-bottom:4px}.platzhalter {
+    background: var(--gold-soft);
+    border: 1px dashed var(--gold);
+    border-radius: 14px;
+    padding: 18px;
+    font-size: 14px;
+    color: var(--gray);
+    text-align: center;
+  }
+  .platzhalter p {
+    margin: 0 0 14px;
+  }
+  .bibliothek-link {
+    display: block;
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 12px;
+    background: var(--black);
+    color: var(--white);
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .bibliothek-link:hover {
+    background: #2b2823;
+    transform: translateY(-1px);
+  }
+  .bibliothek-link:focus-visible {
+    outline: 3px solid var(--gold-light);
+    outline-offset: 3px;
+  }
+  footer.foot {
+    text-align: center;
+    font-size: 12px;
+    color: var(--gray);
+    margin-top: 30px;
+  }
+</style>
+</head>
+<body>
+<div id="innerCodeReturn" style="display:none;max-width:640px;margin:18px auto 0;padding:0 20px;"><a href="inner-code.html?restore=1" style="display:block;padding:13px 15px;border:1px solid #b8924f;border-radius:12px;background:#fff;color:#1a1815;text-decoration:none;font-size:14px;font-weight:700;">← Zurück zu meinem INNER CODE<br><span style="display:block;margin-top:3px;color:#605a52;font-size:12px;font-weight:400;">Zurück zu deiner persönlichen Auswertung</span></a></div>
+<div class="wrap" id="inhaltsBereich" style="display:none;">
+
+  <header class="top">
+    <div class="eyebrow">Inner Code Systems</div>
+    <h1>Mein ICS</h1>
+    <p class="sub">Deine persönliche Übersicht auf deinem Weg vom Überlebens- in den Gestaltungsmodus.</p>
+  </header>
+
+  <section class="card" id="cardReset" style="display:none;">
+    <h2>Dein RESET-Check</h2>
+    <div class="zeile"><span>Inner Code</span><span class="wert" id="werteInner"></span></div>
+    <div class="zeile"><span>Body Code</span><span class="wert" id="werteBody"></span></div>
+    <div class="zeile"><span>Action Code</span><span class="wert" id="werteAction"></span></div>
+  </section>
+
+  <section class="card" id="cardAuswertung" style="display:none;">
+    <h2>Deine Auswertung</h2>
+    <div class="zeile"><span>Gestaltungsmodus</span><span class="wert" id="werteGestaltung"></span></div>
+    <div class="zeile"><span>Schwerpunkt</span><span class="wert" id="werteSchwerpunkt"></span></div>
+  </section>
+
+  <section class="gegenpol-neu" id="cardGegenpolNeu"><h2>Dein aktueller Gegenpol</h2><div class="gp"><b>ERKANNTES MUSTER</b><span id="gpMuster"></span></div><div class="gp"><b>NEUE QUALITÄT</b><span id="gpQualitaet"></span></div><div class="gp"><b>DEIN NEUER SATZ</b><span id="gpSatz"></span></div><div class="gp" id="gpActionRow" style="display:none"><b>DEINE KONKRETE HANDLUNG</b><span id="gpAction"></span></div></section>
+
+  <section class="next-code" id="cardNextCode"><h2>Dein nächster Schritt</h2><p id="nextCodeText">Dein Gegenpol ist gewählt. Jetzt wird er durch eine konkrete Handlung verkörpert.</p><a class="primary" id="nextMicroLink" href="ics-mikro-reset.html?from=gegenpol" target="_blank" rel="noopener">MIT MIKRO-RESET VERKÖRPERN →</a><a class="secondary" id="nextInnerLink" href="inner-code.html?restore=1">MEINEN INNER CODE ANSEHEN →</a></section>
+
+  <section class="card" id="cardGegenpol" style="display:none;">
+    <h2>Dein Gegenpol</h2>
+    <div class="zeile"><span>Muster</span><span class="wert" id="werteMuster"></span></div>
+    <div class="zeile"><span>Intensität</span><span class="wert" id="werteIntensitaet"></span></div>
+  </section>
+
+  <div class="platzhalter">
+    <p>Entdecke deine persönliche ICS-Bibliothek. Deine Downloads, Workbooks und Guides werden dort nach und nach für dich freigeschaltet.</p>
+    <a class="bibliothek-link" href="ics-bibliothek.html">Meine ICS-Bibliothek öffnen</a>
+  </div>
+
+  <footer class="foot">Inner Code Systems · innercodesystems.com</footer>
+</div>
+
+<script src="ics-journey.js"></script>
+<script>
+/* ============================================================
+   ZUGRIFFSPRÜFUNG
+   Nutzt ausschließlich die bestehende, unveränderte ICS_JOURNEY-API.
+   Kein neuer Speichermechanismus, kein localStorage.
+
+   Voraussetzung für den Zugriff: reset_check UND ki_auswertung müssen
+   in der Journey vorhanden sein. gegenpol ist optional (falls bereits
+   erstellt) und wird nur zusätzlich angezeigt, wenn vorhanden.
+   Fehlt eine Voraussetzung, wird ohne sichtbaren Inhalt sofort zu
+   index.html weitergeleitet (selber Tab).
+   ============================================================ */
+(function pruefeZugangUndZeigeInhalt(){
+  let gegenpolDirekt=null;
+  try{gegenpolDirekt=JSON.parse(localStorage.getItem('icsGegenpolResult')||'null')}catch(e){}
+  const quelle=new URLSearchParams(location.search).get('from');
+  const vonGegenpol=quelle==='gegenpol'||quelle==='mikro-reset';
+  let mikroDirekt=null;
+  try{mikroDirekt=JSON.parse(localStorage.getItem('icsMicroResetResult')||'null')}catch(e){}
+  if(vonGegenpol && gegenpolDirekt && gegenpolDirekt.pattern){
+    document.getElementById("inhaltsBereich").style.display="block";
+    const c=document.getElementById("cardGegenpolNeu");c.style.display="block";
+    document.getElementById("gpMuster").textContent=gegenpolDirekt.pattern||"—";
+    document.getElementById("gpQualitaet").textContent=gegenpolDirekt.quality||"—";
+    document.getElementById("gpSatz").textContent=gegenpolDirekt.sentence||"—";
+    const konkreteHandlung=(mikroDirekt&&mikroDirekt.action)||gegenpolDirekt.action||"";
+    if(konkreteHandlung){document.getElementById("gpActionRow").style.display="block";document.getElementById("gpAction").textContent=konkreteHandlung;}
+    window.ICS_GEGENPOL_DIREKT=gegenpolDirekt;
+    document.getElementById("cardNextCode").style.display="block";
+    document.getElementById("nextCodeText").textContent=quelle==="mikro-reset"?"Dein Mikro-RESET ist gespeichert. Jetzt zählt deine gewählte Handlung im Alltag.":"Du hast "+(gegenpolDirekt.quality||"eine neue Qualität")+" gewählt. Jetzt übersetzen wir diesen Code in eine konkrete Handlung.";
+    if(quelle==="mikro-reset"){const p=document.getElementById("nextMicroLink");if(p)p.remove();const s=document.getElementById("nextInnerLink");if(s)s.remove();}
+  }
+  if (typeof ICS_JOURNEY === "undefined") {
+    if(vonGegenpol && gegenpolDirekt && gegenpolDirekt.pattern)return;
+    window.location.href = "index.html";
+    return;
+  }
+
+  let gelesen;
+  try {
+    gelesen = ICS_JOURNEY.leseJourney();
+  } catch (e) {
+    window.location.href = "index.html";
+    return;
+  }
+
+  if (!gelesen.ok || !gelesen.objekt || !gelesen.objekt.reset_check || !gelesen.objekt.ki_auswertung) {
+    if(vonGegenpol && gegenpolDirekt && gegenpolDirekt.pattern)return;
+    window.location.href = "index.html";
+    return;
+  }
+
+  const journey = gelesen.objekt;
+
+  // Journey-Daten für spätere Freischaltungen (Downloads, Workbooks, Guides)
+  // global verfügbar machen, ohne sie irgendwo zusätzlich zu speichern —
+  // sie leben ausschließlich in der bestehenden Journey (sessionStorage).
+  window.ICS_MEIN_ICS_DATEN = journey;
+
+  document.getElementById("inhaltsBereich").style.display = "block";
+
+  const rc = journey.reset_check;
+  document.getElementById("cardReset").style.display = "block";
+  document.getElementById("werteInner").textContent = rc.inner_code_prozent + " %";
+  document.getElementById("werteBody").textContent = rc.body_code_prozent + " %";
+  document.getElementById("werteAction").textContent = rc.action_code_prozent + " %";
+
+  const ki = journey.ki_auswertung;
+  document.getElementById("cardAuswertung").style.display = "block";
+  document.getElementById("werteGestaltung").textContent =
+    (typeof ki.gestaltungsmodus_prozent === "number" ? ki.gestaltungsmodus_prozent + " %" : "—");
+  document.getElementById("werteSchwerpunkt").textContent = ki.schwaechster_code || "—";
+
+  if (journey.gegenpol) {
+    document.getElementById("cardGegenpol").style.display = "block";
+    document.getElementById("werteMuster").textContent = journey.gegenpol.muster_id || "—";
+    document.getElementById("werteIntensitaet").textContent = journey.gegenpol.intensitaet || "—";
+  }
+})();
+</script>
+
+  <div style="margin-top:24px; text-align:center;">
+<a
+  id="backToIcsApp"
+  href="https://app.innercodesystems.com"
+    style="
+      display:inline-block;
+      padding:14px 20px;
+      border-radius:14px;
+      background:#1a1815;
+      color:#f6f1e7;
+      text-decoration:none;
+      font-weight:600;
+    "
+  >
+    Zurück zu meiner ICS App
+  </a>
+</div>
+
+<script>
+document
+  .getElementById('backToIcsApp')
+.addEventListener('click', (event) => {
+
+  event.preventDefault();
+
+  if (typeof ICS_JOURNEY === 'undefined') return;
+
+    const gelesen = ICS_JOURNEY.leseJourney();
+
+    if (!gelesen?.ok || !gelesen.objekt) return;
+
+const journey = gelesen.objekt;
+
+const appPayload = {
+  version: journey.version || '2.0',
+  sessionId: journey.session_id || '',
+  createdAt: journey.created_at || new Date().toISOString(),
+
+  resetCheck: journey.reset_check
+    ? {
+        innerCode: journey.reset_check.inner_code_prozent ?? null,
+        bodyCode: journey.reset_check.body_code_prozent ?? null,
+        actionCode: journey.reset_check.action_code_prozent ?? null,
+        createdAt: journey.reset_check.erstellt_am || null
+      }
+    : null,
+
+  evaluation: journey.ki_auswertung
+    ? {
+        strongestCode: journey.ki_auswertung.staerkster_code || null,
+        weakestCode: journey.ki_auswertung.schwaechster_code || null
+      }
+    : null,
+
+  counterPole: journey.gegenpol
+    ? {
+        patternId: journey.gegenpol.muster_id || null,
+        intensity: journey.gegenpol.intensitaet || null,
+        createdAt: journey.gegenpol.erstellt_am || null
+      }
+    : null
+};
+
+console.log(
+  'ICS App Payload:',
+  appPayload
+);
+  });
+</script>
+  
+<script>(function(){try{var fromInner=new URLSearchParams(location.search).get('from')==='inner-code';var hasInner=!!localStorage.getItem('icsInnerCodeState');if(fromInner||hasInner){var el=document.getElementById('innerCodeReturn');if(el)el.style.display='block'}}catch(e){}})();</script>
+</body>
+</html>
