@@ -607,9 +607,13 @@ themeBox('⌂ FAMILIE & WURZELN','Dein IC liegt im Zeichen '+sign(ic)+'. Haus 4 
 themeBox('∞ INTIMITÄT & TRANSFORMATION','Haus 8 steht für Tiefe, gemeinsame Ressourcen und Wandlung. In deinem Chart liegen dort '+(hc[8]||0)+' der betrachteten Faktoren. Pluto in '+pSign.Pluto+' ergänzt das Thema Transformation.','REFLEXION · Wo versuche ich festzuhalten, obwohl Veränderung bereits begonnen hat?')+
 themeBox('☿ KOMMUNIKATION & ENTSCHEIDUNG','Merkur in '+pSign.Merkur+' verarbeitet Informationen '+mind[idx(pSign.Merkur)]+'. Mars möchte '+drive[idx(pSign.Mars)]+'.','REFLEXION · Habe ich verstanden, gefühlt und entschieden – oder nur schnell reagiert?')+
 themeBox('✦ SPIRITUALITÄT & INNERE WELT','Haus 12 beschreibt Rückzug, Unterbewusstes und Regeneration. Bei dir liegen dort '+(hc[12]||0)+' der betrachteten Faktoren. Neptun in '+pSign.Neptun+' ergänzt die intuitive Ebene.','REFLEXION · Wo brauche ich weniger Input und mehr innere Stille?');
+let devIsTension=(maType==='Quadrat'||maType==='Opposition');
+let devIsFlow=(maType==='Sextil'||maType==='Trigon');
+let devStep2Title=devIsTension?'2 · BEIDE SEITEN VERBINDEN':devIsFlow?'2 · POTENZIAL BEWUSST NUTZEN':'2 · KRÄFTE UNTERSCHEIDEN';
+let devStep2Text=devIsTension?'Unterbrich den Automatismus und suche einen nächsten Schritt, der beiden beteiligten Kräften Raum gibt.':devIsFlow?'Achte darauf, diese unterstützende Verbindung nicht als selbstverständlich zu übersehen. Setze sie in einer konkreten Situation gezielt ein.':'Nimm beide beteiligten Kräfte zunächst einzeln wahr und entscheide dann bewusst, wie sie gemeinsam wirken sollen.';
 document.getElementById('developmentPath').innerHTML=
-'<div class="reflection"><b>1 · BEWUSST WERDEN</b><br>Beobachte besonders '+aspText+'. Welche wiederkehrende Situation macht diese Dynamik in deinem Alltag sichtbar?</div>'+
-'<div class="reflection"><b>2 · GEGENPOL WÄHLEN</b><br>Unterbrich nicht dich selbst, sondern den Automatismus. Wähle eine Qualität, die deinem bisherigen Muster fehlt.</div>'+
+'<div class="reflection"><b>1 · BEWUSST WERDEN</b><br>Beobachte besonders '+aspText+'. Wo zeigt sich diese Verbindung in deinem Alltag bereits konkret?</div>'+
+'<div class="reflection"><b>'+devStep2Title+'</b><br>'+devStep2Text+'</div>'+
 '<div class="reflection"><b>3 · VERKÖRPERN</b><br>Setze innerhalb von 24 Stunden eine kleine sichtbare Handlung. Entwicklung wird zum neuen Code, wenn Erkenntnis wiederholt erlebt wird.</div>';
 try{localStorage.setItem('icsGegenpolContext',JSON.stringify({pattern:modePattern,guidance:modeBalance,savedAt:Date.now()}))}catch(e){}
 let gegenpolUrl='gegenpol-generator.html?from=inner-code&v=202610011000&p='+encodeURIComponent(modePattern)+'&g='+encodeURIComponent(modeBalance);
