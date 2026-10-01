@@ -343,23 +343,37 @@ function mcLon(J,lon){let T=(J-2451545)/36525,theta=norm(280.46061837+360.985647
 function houseOf(lon,asc){return Math.floor(norm(lon-asc)/30)+1}
 function houseCusp(asc,h){return norm(asc+(h-1)*30)}
 const modeText={kardinal:'Dinge in Bewegung bringen',fix:'Energie halten und vertiefen',veränderlich:'dich anzupassen, zu lernen und weiterzuentwickeln'};
-function historicOffsetMinutes(ds,ts,lat,lon){
-  const y=+ds.slice(0,4),m=+ds.slice(5,7),d=+ds.slice(8,10),hh=+ts.slice(0,2),mm=+ts.slice(3,5);
-  /* Europa-Zeitzone: vor 1980 keine moderne EU-Sommerzeit-Regel anwenden.
-     Für deutsche Geburtsorte ab 1980: letzter Sonntag März bis letzter Sonntag September/Oktober.
-     Außerhalb Mitteleuropas bleibt die Browserzeit als Fallback bestehen. */
-  if(lon>=5&&lon<=16&&lat>=45&&lat<=56){
-    let off=60;
-    if(y>=1980){
-      const lastSun=(yr,mo)=>{let z=new Date(Date.UTC(yr,mo,0));return z.getUTCDate()-z.getUTCDay()};
-      const start=lastSun(y,3), end=lastSun(y,y>=1996?10:9);
-      if(m>3&&m<(y>=1996?10:9))off=120;
-      else if(m===3&&(d>start||(d===start&&hh>=2)))off=120;
-      else if(m===(y>=1996?10:9)&&(d<end||(d===end&&hh<3)))off=120;
-    }
-    return off;
+async function timezoneIdForCoords(lat,lon){
+  const u='https://timeapi.io/api/TimeZone/coordinate?latitude='+encodeURIComponent(lat)+'&longitude='+encodeURIComponent(lon);
+  const r=await fetch(u,{headers:{'Accept':'application/json'}});
+  if(!r.ok)throw Error('Zeitzone konnte nicht ermittelt werden.');
+  const a=await r.json(),tz=a.timeZone;
+  if(!tz)throw Error('Zeitzone konnte nicht ermittelt werden.');
+  try{new Intl.DateTimeFormat('en-US',{timeZone:tz}).format(new Date())}catch(e){throw Error('Zeitzone wird auf diesem Gerät nicht unterstützt.')}
+  return tz;
+}
+function ianaOffsetMinutes(ds,ts,tz){
+  const p=ds.split('-').map(Number),t=ts.split(':').map(Number);
+  const wanted=Date.UTC(p[0],p[1]-1,p[2],t[0],t[1],0);
+  const partsAt=(ms)=>Object.fromEntries(new Intl.DateTimeFormat('en-CA',{
+    timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',
+    hourCycle:'h23'
+  }).formatToParts(new Date(ms)).filter(x=>x.type!=='literal').map(x=>[x.type,x.value]));
+  let guess=wanted;
+  for(let i=0;i<3;i++){
+    const q=partsAt(guess);
+    const shown=Date.UTC(+q.year,+q.month-1,+q.day,+q.hour,+q.minute,0);
+    guess+=wanted-shown;
   }
-  return -new Date(ds+'T'+ts+':00').getTimezoneOffset();
+  const check=partsAt(guess);
+  if(+check.year!==p[0]||+check.month!==p[1]||+check.day!==p[2]||+check.hour!==t[0]||+check.minute!==t[1]){
+    throw Error('Diese Geburtszeit liegt in einer Zeitumstellung. Bitte die damalige offizielle Uhrzeit prüfen.');
+  }
+  return (wanted-guess)/60000;
+}
+function birthJulian(ds,ts,tz){
+  const p=ds.split('-').map(Number),t=ts.split(':').map(Number),off=ianaOffsetMinutes(ds,ts,tz);
+  return jd(new Date(Date.UTC(p[0],p[1]-1,p[2],t[0],t[1]-off,0)));
 }
 function planetApprox(J,planet){
  const d=J-2451543.5, P={
@@ -389,8 +403,8 @@ function themeBox(title,text,q){return '<div class="theme-item"><button class="t
 function aspectCard(a,b,t){let m=aspectMeaning[t];return '<div class="reflection"><b>'+a+' '+t+' '+b+'</b><br><span class="note">'+bodyMeaning[a]+' ↔ '+bodyMeaning[b]+'</span><p><b>KRAFT</b><br>'+m.kraft+'</p><p><b>MUSTER</b><br>'+m.muster+'</p><div class="deep-action"><b>INTEGRATION</b><br>'+m.impuls+'</div></div>'}
 function angleDiff(a,b){let d=Math.abs(norm(a-b));return d>180?360-d:d}
 function aspectData(a,b){let d=angleDiff(a,b),defs=[[0,7,'Konjunktion'],[60,5,'Sextil'],[90,6,'Quadrat'],[120,6,'Trigon'],[180,7,'Opposition']];for(const z of defs){let orb=Math.abs(d-z[0]);if(orb<=z[1])return {name:z[2],orb:orb}}return null}function aspectName(a,b){let x=aspectData(a,b);return x?x.name:null}
-function birthJulian(ds,ts,lat,lon){const p=ds.split('-').map(Number),t=ts.split(':').map(Number),off=historicOffsetMinutes(ds,ts,lat,lon);return jd(new Date(Date.UTC(p[0],p[1]-1,p[2],t[0],t[1]-off,0)))} 
-async function preview(){let n=document.getElementById('name').value.trim(),ds=document.getElementById('date').value,ts=document.getElementById('time').value,p=document.getElementById('place').value.trim(),er=document.getElementById('err'),calc=document.getElementById('calc'),title=document.getElementById('title'),meta=document.getElementById('meta'),sun=document.getElementById('sun'),moon=document.getElementById('moon'),asc=document.getElementById('asc'),suntext=document.getElementById('suntext'),moontext=document.getElementById('moontext'),asctext=document.getElementById('asctext'),combo=document.getElementById('combo'),strength=document.getElementById('strength'),pattern=document.getElementById('pattern'),drain=document.getElementById('drain'),support=document.getElementById('support'),development=document.getElementById('development');er.style.display='none';if(!ds||!ts||!p){er.textContent='Bitte Datum, Uhrzeit und Geburtsort vollständig eingeben.';er.style.display='block';return}calc.disabled=true;calc.textContent='WIRD BERECHNET …';try{let q=encodeURIComponent(p),r=await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&q='+q,{headers:{'Accept-Language':'de'}}),a=await r.json();if(!a.length)throw Error('Geburtsort nicht gefunden. Bitte Ort und Land ergänzen.');let lat=+a[0].lat,lon=+a[0].lon;let J=birthJulian(ds,ts,lat,lon),birthDate=new Date((J-2440587.5)*86400000),astroOK=typeof Astronomy!=='undefined';
+
+async function preview(){let n=document.getElementById('name').value.trim(),ds=document.getElementById('date').value,ts=document.getElementById('time').value,p=document.getElementById('place').value.trim(),er=document.getElementById('err'),calc=document.getElementById('calc'),title=document.getElementById('title'),meta=document.getElementById('meta'),sun=document.getElementById('sun'),moon=document.getElementById('moon'),asc=document.getElementById('asc'),suntext=document.getElementById('suntext'),moontext=document.getElementById('moontext'),asctext=document.getElementById('asctext'),combo=document.getElementById('combo'),strength=document.getElementById('strength'),pattern=document.getElementById('pattern'),drain=document.getElementById('drain'),support=document.getElementById('support'),development=document.getElementById('development');er.style.display='none';if(!ds||!ts||!p){er.textContent='Bitte Datum, Uhrzeit und Geburtsort vollständig eingeben.';er.style.display='block';return}calc.disabled=true;calc.textContent='WIRD BERECHNET …';try{let q=encodeURIComponent(p),r=await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&q='+q,{headers:{'Accept-Language':'de'}}),a=await r.json();if(!a.length)throw Error('Geburtsort nicht gefunden. Bitte Ort und Land ergänzen.');let lat=+a[0].lat,lon=+a[0].lon,tz=await timezoneIdForCoords(lat,lon);let J=birthJulian(ds,ts,tz),birthDate=new Date((J-2440587.5)*86400000),astroOK=typeof Astronomy!=='undefined';
 /* Geozentrische tropische Ekliptiklaengen:
    EclipticLongitude() ist in Astronomy Engine HELIOZENTRISCH und daher fuer ein Geburtshoroskop ungeeignet.
    GeoVector() liefert den Vektor vom Erdmittelpunkt zum Koerper; Ecliptic() wandelt ihn in die wahre
