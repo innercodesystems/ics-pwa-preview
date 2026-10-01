@@ -144,7 +144,8 @@ function toggleInfo(id,btn){let p=document.getElementById(id),open=p.classList.t
 function infoHtml(title,text){return '<b>'+title+'</b><br>'+text}
 function toggleDeep(id,btn){let p=document.getElementById(id),open=p.classList.toggle('on');btn.classList.toggle('open',open);btn.textContent=open?'WENIGER ANZEIGEN ↑':'TIEFER EINTAUCHEN ↓'}
 function deepBlock(title,text,action){return '<h3>'+title+'</h3><p>'+text+'</p><div class="deep-action"><b>DEIN IMPULS</b><br>'+action+'</div>'}
-function closeGuideAndJump(id){let g=document.getElementById('floatingGuide');if(g)g.classList.remove('on');let m=document.getElementById('quickMore');if(m)m.classList.remove('on');let e=document.getElementById(id);if(e)e.scrollIntoView({behavior:'smooth',block:'start'})}
+function closeTopGuide(){document.querySelectorAll('details.guide[open]').forEach(function(d){d.open=false})}
+function closeGuideAndJump(id){closeTopGuide();let g=document.getElementById('floatingGuide');if(g)g.classList.remove('on');let m=document.getElementById('quickMore');if(m)m.classList.remove('on');let e=document.getElementById(id);if(e)e.scrollIntoView({behavior:'smooth',block:'start'})}
 function toggleFloatingGuide(){let g=document.getElementById('floatingGuide');if(!g)return;g.classList.toggle('on');let m=document.getElementById('quickMore');if(m)m.classList.remove('on')}function guideJump(id){let g=document.getElementById('floatingGuide');if(g)g.classList.remove('on');jumpTo(id)}
 function toggleQuickMore(){let m=document.getElementById('quickMore');if(m)m.classList.toggle('on')}
 function quickJump(id){let m=document.getElementById('quickMore');if(m)m.classList.remove('on');let g=document.getElementById('floatingGuide');if(g)g.classList.remove('on');jumpTo(id)}
