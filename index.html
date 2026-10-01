@@ -48,6 +48,16 @@
   p,li{orphans:3;widows:3}
   .print-cover{min-height:250mm!important;padding:16mm!important}
 }
+/* PRINT QUALITY PASS 2 */
+@media print{
+  body,.card,.card p,.reflection,.theme-box,.deep-panel,.info-panel{letter-spacing:normal!important;word-spacing:normal!important;text-rendering:optimizeLegibility}
+  .card{break-inside:auto!important;page-break-inside:auto!important}
+  .card>h1,.card>h2,.card>h3,.card>.tag{break-after:avoid-page!important;page-break-after:avoid!important}
+  .reflection,.theme-box,.deep-panel,.info-panel{break-inside:avoid-page!important;page-break-inside:avoid!important}
+  .chapter{break-before:auto!important;page-break-before:auto!important}
+  .chapter:not(:first-of-type){margin-top:6mm!important}
+  p{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:normal;word-break:normal}
+}
 </style></head><body><main class="wrap"><div class="brand">INNER CODE SYSTEMS</div>
 <section id="s1" class="step on"><div class="hero"><div class="orb">✦</div><h1>Dein INNER CODE</h1><p>Ein erster Blick auf deinen astrologischen Grundcode – klar, persönlich und ohne Fachsprache.</p></div><div class="card"><div class="tag">DEIN PERSÖNLICHER ASTRO-CODE</div><p>Geburtsdatum, genaue Uhrzeit und Geburtsort genügen.</p><button onclick="go(2)">MEINEN CODE ENTDECKEN</button></div></section>
 <section id="s2" class="step"><div class="hero"><div class="orb">☉</div><h1>Deine Geburtsdaten</h1><p>Bitte so genau wie möglich eingeben.</p></div><div class="card"><label>Vorname</label><input id="name" placeholder="Dein Vorname"><label>Geburtsdatum</label><input id="date" type="date"><label>Geburtszeit</label><input id="time" type="time"><label>Geburtsort</label><input id="place" placeholder="z. B. Überlingen, Deutschland"><div id="err" class="err"></div><button id="calc" onclick="preview()">MEINEN CODE BERECHNEN</button><button type="button" id="newPersonBtn" onclick="newPerson()" style="width:100%;padding:14px;margin-top:12px;border:1px solid #b8924f88;border-radius:14px;background:transparent;color:#b8924f;font-weight:800;font-size:14px">NEUE PERSON · DATEN LÖSCHEN</button></div></section>
