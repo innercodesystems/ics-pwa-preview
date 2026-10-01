@@ -104,6 +104,13 @@
  #printCover,#reportActionCard{display:none!important}
  #s3>.hero:first-child{break-before:auto!important;page-break-before:auto!important}
 }
+/* PRINT VISIBILITY FIX · only calculated result is printable */
+@media print{
+  #s1,#s2{display:none!important}
+  #s3{display:block!important;visibility:visible!important}
+  #s3 .quick-nav,#s3 .guide-float,#s3 #guideFallbackBtn,#s3 .guide,#s3 .result-nav,
+  #s3 #reportActionCard,#s3 #printReportBtn,#s3 #newPersonBtn{display:none!important}
+}
 </style></head><body><main class="wrap"><div class="brand">INNER CODE SYSTEMS</div>
 <section id="s1" class="step on"><div class="hero"><div class="orb">✦</div><h1>Dein INNER CODE</h1><p>Ein erster Blick auf deinen astrologischen Grundcode – klar, persönlich und ohne Fachsprache.</p></div><div class="card"><div class="tag">DEIN PERSÖNLICHER ASTRO-CODE</div><p>Geburtsdatum, genaue Uhrzeit und Geburtsort genügen.</p><button onclick="go(2)">MEINEN CODE ENTDECKEN</button></div></section><div id="reportActionCard" class="card"><div class="tag">▤ DEIN PERSÖNLICHER REPORT</div><h2>INNER CODE mitnehmen</h2><p>Deine Auswertung kann jetzt als ruhiger persönlicher Report gedruckt oder auf dem Handy als PDF gespeichert werden.</p><button id="printReportBtn" type="button" onclick="window.print()">REPORT DRUCKEN · ALS PDF SPEICHERN</button></div>
 <div id="synthesis" class="chapter">04 · DEINE GESAMTSYNTHESE</div><div class="card"><div class="tag">★ DAS SOLLTEST DU MITNEHMEN</div><h2>Dein INNER CODE auf den Punkt gebracht</h2><div id="takeaway"></div></div><div class="card"><div class="tag">✦ DEINE GROSSE INNER-CODE-SYNTHESE</div><h2>Was dein Gesamtbild erzählt</h2><p id="masterSynthesis" class="quote"></p><button class="deep-btn" onclick="jumpTo('practice')">WEITER ZU DEINER INTEGRATION ↓</button></div>
