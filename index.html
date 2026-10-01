@@ -302,7 +302,7 @@ let houseBodies={Sonne:sl,Mond:ml,...pl},houseMap={};Object.keys(houseBodies).fo
 document.getElementById('houseGrid').innerHTML=houseNames.map((hn,i)=>{let c=houseCusp(al,i+1);return '<div class="code-chip"><b>HAUS '+(i+1)+' · '+sign(c)+' '+signDegree(c)+'</b>'+hn+'</div>'}).join('');
 document.getElementById('planetHouses').innerHTML=Object.keys(houseBodies).map(k=>{let h=houseMap[k];return '<div class="reflection"><b>'+k+' · Haus '+h+' – '+houseNames[h-1]+'</b><br>'+planetRole[k]+' richtet sich besonders auf '+houseMeaning[h-1]+'.</div>'}).join('');
 let hc={};Object.values(houseMap).forEach(h=>hc[h]=(hc[h]||0)+1);let ranked=Object.keys(hc).map(Number).sort((a,b)=>hc[b]-hc[a]),top=ranked.slice(0,3);
-document.getElementById('focusHouses').innerHTML=top.map(h=>'<div class="code-chip"><b>HAUS '+h+' · '+hc[h]+' '+(hc[h]===1?'FAKTOR':'FAKTOREN')</b>'+houseNames[h-1]+'</div>').join('');
+document.getElementById('focusHouses').innerHTML=top.map(h=>'<div class="code-chip"><b>HAUS '+h+' · '+hc[h]+' '+(hc[h]===1?'FAKTOR':'FAKTOREN')+'</b>'+houseNames[h-1]+'</div>').join('');
 document.getElementById('lifeMap').textContent='Besonders viel astrologische Aktivität bündelt sich in '+top.map(h=>'Haus '+h+' ('+houseNames[h-1]+')').join(', ')+'. Das bedeutet nicht, dass andere Lebensbereiche unwichtig sind. Diese Felder tragen in deinem Geburtsbild lediglich mehrere der hier betrachteten Kräfte gleichzeitig.';
 let mcValue=mcLon(J,lon),dc=norm(al+180),ic=norm(mcValue+180),south=norm(pl.Mondknoten+180);
 document.getElementById('axisGrid').innerHTML=[['AC · Auftreten',al],['DC · Gegenüber',dc],['MC · Wirkung',mcValue],['IC · Wurzeln',ic]].map(z=>'<div class="code-chip"><b>'+z[0]+'</b>'+sign(z[1])+' · '+signDegree(z[1])+'</div>').join('');
