@@ -76,10 +76,19 @@
   .card:has(> div[id]:last-child:empty){display:none!important}
   .card:has(> p[id]:last-child:empty){display:none!important}
 }
-/* PRINT FLOW PASS · aspect list only */
+/* PRINT FLOW PASS · dynamic report sections */
 @media print{
-  #aspectCodes.card{break-inside:auto!important;page-break-inside:auto!important}
-  #aspectCodes .reflection{break-inside:avoid-page!important;page-break-inside:avoid!important}
+  /* aspectCodes and houseGrid live INSIDE their report cards.
+     Let those variable-length parent cards flow across pages, while keeping each aspect intact. */
+  .card:has(> #aspectCodes),
+  .card:has(> #houseGrid){
+    break-inside:auto!important;
+    page-break-inside:auto!important;
+  }
+  #aspectCodes .reflection{
+    break-inside:avoid-page!important;
+    page-break-inside:avoid!important;
+  }
 }
 /* MOBILE FORM FIX · keep Android autofill from visually covering fields */
 @media (max-width:700px){
@@ -467,7 +476,7 @@ document.getElementById('masterSynthesis').textContent='Dein INNER CODE verbinde
 document.getElementById('callingCode').textContent='Für Wirkung und Berufung sind in deinem Bild besonders dein Sonnenfeld Haus '+sunH+' ('+houseNames[sunH-1]+') sowie Saturn in Haus '+satH+' ('+houseNames[satH-1]+') interessant. Dein Kern möchte '+core[si]+'. Reife entsteht dabei über '+maturity[idx(pSign.Saturn)]+'. Die Verbindung daraus lautet: Nicht nur tun, was möglich ist, sondern Verantwortung für das übernehmen, was für dich wirklich Bedeutung hat.';
 document.getElementById('valueCode').textContent='Venus in '+pSign.Venus+' im Haus '+venusH+' verbindet deine Werte mit dem Lebensbereich „'+houseNames[venusH-1]+'“. Jupiter in Haus '+jupH+' zeigt zusätzlich einen Bereich, in dem Erweiterung und Vertrauen wachsen können. Für dich kann Fülle deshalb weniger nur Besitz bedeuten als die Erfahrung, dass deine Werte, Beziehungen und dein Wachstum miteinander übereinstimmen.';
 document.getElementById('bondCode').textContent='Dein Mond in '+ms+' braucht '+emotional[mi]+'. Venus in '+pSign.Venus+' sucht '+love[idx(pSign.Venus)]+'. Weil Venus bei dir im Haus '+venusH+' steht, wird Beziehung zusätzlich mit dem Lebensbereich „'+houseNames[venusH-1]+'“ verbunden. Nähe wird besonders stimmig, wenn du weder dein emotionales Bedürfnis noch deine Werte zugunsten bloßer Anpassung übergehst.';
-document.getElementById('growthCode').textContent='Dein nördlicher Mondknoten liegt im Zeichen '+pSign.Mondknoten+' und im Haus '+nodeH+'. Symbolisch verbindet sich damit '+core[idx(pSign.Mondknoten)]+' mit dem Lebensfeld „'+houseNames[nodeH-1]+'“. Jupiter ergänzt diesen Weg über '+growth[idx(pSign.Jupiter)]+'. Entwicklung bedeutet hier nicht, jemand anderes zu werden, sondern bisher weniger gelebte Möglichkeiten bewusster einzubeziehen.';
+document.getElementById('growthCode').textContent='Dein nördlicher Mondknoten liegt im Zeichen '+pSign.Mondknoten+' und im Haus '+nodeH+'. Symbolisch verbindet sich damit '+core[idx(pSign.Mondknoten)]+' mit dem Lebensfeld „'+houseNames[nodeH-1]+'“. Jupiter ergänzt diesen Weg durch '+growth[idx(pSign.Jupiter)]+'. Entwicklung bedeutet hier nicht, jemand anderes zu werden, sondern bisher weniger gelebte Möglichkeiten bewusster einzubeziehen.';
 document.getElementById('deepDrain').innerHTML=deepBlock('Deine persönlichen Energieräuber','Bei deinem '+ss+'-Kern kostet es besonders Kraft, wenn dein Bedürfnis nach '+core[si]+' dauerhaft keinen Raum bekommt. Dein '+ms+'-Mond reagiert zusätzlich sensibel darauf, wenn dein Bedürfnis nach '+emotionalDat[mi]+' zu kurz kommt. Mars in '+pSign.Mars+' kann unter Druck dazu führen, dass du vorschnell ins Handeln gehst, obwohl dein Inneres noch nicht mitgekommen ist. Diese Mars-Qualität richtet deine Energie darauf, '+drive[idx(pSign.Mars)]+'.','Achte heute auf den Moment, an dem deine Energie sinkt. Frage nicht zuerst „Was muss ich noch tun?“, sondern: „Welchen Teil von mir übergehe ich gerade?“');
 document.getElementById('deepSupport').innerHTML=deepBlock('Dein persönlicher Kraftschalter','Deine Energie kommt eher zurück, wenn Kern, Gefühl und Handlung wieder dieselbe Richtung bekommen: Dein Kern orientiert sich an '+core[si]+', emotional brauchst du '+emotional[mi]+' und anschließend darfst du '+drive[idx(pSign.Mars)]+'.','Mach daraus deinen 60-Sekunden-Check: WILL ICH DAS? · BRAUCHE ICH DAS? · IST JETZT HANDELN STIMMIG? Erst danach gehst du weiter.');
 document.getElementById('deepDevelopmentCode').innerHTML=deepBlock('Vom alten Muster in den neuen Code','Dein Entwicklungscode verbindet den Nordknoten in '+pSign.Mondknoten+' mit Haus '+nodeH+' – „'+houseNames[nodeH-1]+'“. Wachstum heißt hier nicht, dein bisheriges Verhalten abzulehnen, sondern eine zusätzliche Möglichkeit zu entwickeln.','Wähle heute genau eine Situation, in der du nicht automatisch reagierst. Formuliere zuerst deinen neuen Gegenpol und setze danach eine kleine Handlung um.');
