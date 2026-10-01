@@ -30,6 +30,24 @@
 .calculation-info{border-style:dashed}.calculation-info .small{font-size:12px;line-height:1.65;color:var(--muted)}
 /* PRINT COVER POLISH */
 .print-cover{display:none}@media print{.print-cover{display:flex!important;min-height:92vh;flex-direction:column;justify-content:center;page-break-after:always;padding:18mm}.print-brand{font-size:11pt;letter-spacing:.22em}.print-kicker{margin-top:42mm;font-size:10pt;letter-spacing:.18em}.print-cover h1{font-size:30pt;margin:8mm 0 4mm}.print-rule{width:35mm;border-top:1px solid #b8924f;margin:2mm 0 8mm}.print-cover p{max-width:125mm;font-size:13pt;line-height:1.6}}
+/* COMPACT PRINT REPORT */
+@media print{
+  @page{size:A4;margin:13mm 12mm 14mm}
+  body{font-size:9.6pt;line-height:1.38}
+  .wrap,.container,main{max-width:none!important;width:100%!important;margin:0!important;padding:0!important}
+  .card{padding:7mm!important;margin:0 0 5mm!important;border-radius:4mm!important;break-inside:avoid-page;page-break-inside:avoid}
+  .card h1,.card h2,.card h3{margin-top:2mm!important;margin-bottom:3mm!important}
+  .card p{margin-top:2mm!important;margin-bottom:2.5mm!important}
+  .chapter{margin:8mm 0 5mm!important;padding:4mm 5mm!important;break-after:avoid-page;page-break-after:avoid}
+  .chapter+.card{break-before:avoid-page;page-break-before:avoid}
+  .reflection,.theme-box,.deep-panel,.info-panel{padding:4mm!important;margin:3mm 0!important}
+  .tag{margin-bottom:2mm!important}
+  button,.quick-nav,.guide-float,.guide,.result-nav,#newPersonBtn,#printReportBtn{display:none!important}
+  .deep-panel,.info-panel,[hidden].deep-panel,[hidden].info-panel{display:block!important}
+  h1,h2,h3,.tag{break-after:avoid-page;page-break-after:avoid}
+  p,li{orphans:3;widows:3}
+  .print-cover{min-height:250mm!important;padding:16mm!important}
+}
 </style></head><body><main class="wrap"><div class="brand">INNER CODE SYSTEMS</div>
 <section id="s1" class="step on"><div class="hero"><div class="orb">✦</div><h1>Dein INNER CODE</h1><p>Ein erster Blick auf deinen astrologischen Grundcode – klar, persönlich und ohne Fachsprache.</p></div><div class="card"><div class="tag">DEIN PERSÖNLICHER ASTRO-CODE</div><p>Geburtsdatum, genaue Uhrzeit und Geburtsort genügen.</p><button onclick="go(2)">MEINEN CODE ENTDECKEN</button></div></section>
 <section id="s2" class="step"><div class="hero"><div class="orb">☉</div><h1>Deine Geburtsdaten</h1><p>Bitte so genau wie möglich eingeben.</p></div><div class="card"><label>Vorname</label><input id="name" placeholder="Dein Vorname"><label>Geburtsdatum</label><input id="date" type="date"><label>Geburtszeit</label><input id="time" type="time"><label>Geburtsort</label><input id="place" placeholder="z. B. Überlingen, Deutschland"><div id="err" class="err"></div><button id="calc" onclick="preview()">MEINEN CODE BERECHNEN</button><button type="button" id="newPersonBtn" onclick="newPerson()" style="width:100%;padding:14px;margin-top:12px;border:1px solid #b8924f88;border-radius:14px;background:transparent;color:#b8924f;font-weight:800;font-size:14px">NEUE PERSON · DATEN LÖSCHEN</button></div></section>
