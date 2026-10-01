@@ -197,6 +197,7 @@
   }
   #s2 select{background-image:none!important}
 }
+@media print{.theme-worlds-card{display:none!important}}
 </style></head><body><main class="wrap"><div class="brand">INNER CODE SYSTEMS</div>
 <section id="s1" class="step on"><div class="hero"><div class="orb">✦</div><h1>Dein INNER CODE</h1><p>Ein erster Blick auf deinen astrologischen Grundcode – klar, persönlich und ohne Fachsprache.</p></div><div class="card"><div class="tag">DEIN PERSÖNLICHER ASTRO-CODE</div><p>Geburtsdatum, genaue Uhrzeit und Geburtsort genügen.</p><button onclick="go(2)">MEINEN CODE ENTDECKEN</button></div></section>
 <section id="s2" class="step"><div class="hero"><div class="orb">☉</div><h1>Deine Geburtsdaten</h1><p>Bitte so genau wie möglich eingeben.</p></div><div class="card"><label>Vorname</label><input id="name" placeholder="Dein Vorname"><label>Geburtsdatum</label><input id="date" type="date"><label>Geburtszeit</label><input id="time" type="time"><label>Geburtsort</label><input id="place" placeholder="z. B. Überlingen, Deutschland"><div id="err" class="err"></div><button id="calc" onclick="preview()">MEINEN CODE BERECHNEN</button><button type="button" id="newPersonBtn" onclick="newPerson()" style="width:100%;padding:14px;margin-top:12px;border:1px solid #b8924f88;border-radius:14px;background:transparent;color:#b8924f;font-weight:800;font-size:14px">NEUE PERSON · DATEN LÖSCHEN</button></div></section>
@@ -287,7 +288,7 @@
 <div class="card"><div class="tag">♡ DEINE NÄHE & VERBINDUNG<button class="deep-btn" onclick="toggleDeep('deepBeziehung',this)">TIEFER EINTAUCHEN ↓</button><div id="deepBeziehung" class="deep-panel"></div></div><h2>Was Beziehung mit dir macht</h2><p id="bondCode"></p></div>
 <div class="card"><div class="tag">↟ DEIN WACHSTUMSWEG<button class="deep-btn" onclick="toggleDeep('deepEntwicklung',this)">TIEFER EINTAUCHEN ↓</button><div id="deepEntwicklung" class="deep-panel"></div></div><h2>Wo Entwicklung beginnt</h2><p id="growthCode"></p></div>
 <div class="card"><div class="tag">★ DEINE 5 ZENTRALEN INNER CODES</div><h2>Was sich durch dein Gesamtbild zieht</h2><p>Aus deinem Grundcode, den Lebensräumen und den wichtigsten Verbindungen verdichten sich fünf persönliche Leitcodes.</p><div id="topCodes"></div></div>
-<div class="card"><div class="tag">◎ DEINE THEMENWELTEN</div><h2>Wo dein Code konkret wird</h2><div id="themeWorlds"></div></div>
+<div class="card theme-worlds-card"><div class="tag">◎ DEINE THEMENWELTEN</div><h2>Wo dein Code konkret wird</h2><div id="themeWorlds"></div></div>
 <div class="card"><div class="tag">→ DEIN PERSÖNLICHER ENTWICKLUNGSWEG</div><h2>Drei Felder für deine nächste Phase</h2><div id="developmentPath"></div></div>
 <div id="practice" class="chapter">05 · DEINE INTEGRATION</div><div class="card"><div class="tag">⚑ DEIN 3-SCHRITTE-CODE</div><h2>Vom Erkennen ins Handeln</h2><div id="actionSteps"></div></div>
 <div class="card"><div class="tag">◎ DEIN ALLTAGS-CODE</div><h2>So wird dein Code praktisch</h2><p id="dailyCode"></p></div>
