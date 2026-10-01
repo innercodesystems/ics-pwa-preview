@@ -92,8 +92,8 @@ function infoHtml(title,text){return '<b>'+title+'</b><br>'+text}
 function toggleDeep(id,btn){let p=document.getElementById(id),open=p.classList.toggle('on');btn.classList.toggle('open',open);btn.textContent=open?'WENIGER ANZEIGEN ↑':'TIEFER EINTAUCHEN ↓'}
 function deepBlock(title,text,action){return '<h3>'+title+'</h3><p>'+text+'</p><div class="deep-action"><b>DEIN IMPULS</b><br>'+action+'</div>'}
 function toggleFloatingGuide(){let g=document.getElementById('floatingGuide');if(!g)return;g.classList.toggle('on');let m=document.getElementById('quickMore');if(m)m.classList.remove('on')}function guideJump(id){let g=document.getElementById('floatingGuide');if(g)g.classList.remove('on');jumpTo(id)}
-function toggleQuickMore(){document.getElementById('quickMore').classList.toggle('on')}
-function quickJump(id){document.getElementById('quickMore').classList.remove('on');jumpTo(id)}
+function toggleQuickMore(){let m=document.getElementById('quickMore');if(m)m.classList.toggle('on')}
+function quickJump(id){let m=document.getElementById('quickMore');if(m)m.classList.remove('on');let g=document.getElementById('floatingGuide');if(g)g.classList.remove('on');jumpTo(id)}
 function updateQuickNav(){let q=document.getElementById('quickNav'),r=document.getElementById('s3');if(!q||!r)return;q.classList.toggle('show',r.classList.contains('on'))}
 function jumpTo(id){let e=document.getElementById(id);if(e)e.scrollIntoView({behavior:'smooth',block:'start'})}
 function newPerson(){try{localStorage.removeItem('icsInnerCodeState')}catch(e){}['name','date','time','place'].forEach(id=>{let el=document.getElementById(id);if(el)el.value=''});let er=document.getElementById('err');if(er){er.textContent='';er.style.display='none'}window.scrollTo(0,0)}
