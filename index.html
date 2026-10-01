@@ -58,6 +58,17 @@
   .chapter:not(:first-of-type){margin-top:6mm!important}
   p{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:normal;word-break:normal}
 }
+/* PRINT ORPHAN CONTROL */
+@media print{
+  /* Keep a card's identity/title with the first meaningful content block, while still allowing long cards to flow. */
+  .card>.tag:first-child,.card>.eyebrow:first-child{break-after:avoid-page!important;page-break-after:avoid!important}
+  .card>.tag:first-child+h1,.card>.tag:first-child+h2,.card>.tag:first-child+h3,
+  .card>.eyebrow:first-child+h1,.card>.eyebrow:first-child+h2,.card>.eyebrow:first-child+h3{break-after:avoid-page!important;page-break-after:avoid!important}
+  .card>h1:first-child,.card>h2:first-child,.card>h3:first-child{break-after:avoid-page!important;page-break-after:avoid!important}
+  .card>h1:first-child+*,.card>h2:first-child+*,.card>h3:first-child+*,
+  .card>.tag:first-child+h1+*,.card>.tag:first-child+h2+*,.card>.tag:first-child+h3+*{break-before:avoid-page!important;page-break-before:avoid!important}
+  .card:has(> .tag:first-child){orphans:4;widows:4}
+}
 </style></head><body><main class="wrap"><div class="brand">INNER CODE SYSTEMS</div>
 <section id="s1" class="step on"><div class="hero"><div class="orb">✦</div><h1>Dein INNER CODE</h1><p>Ein erster Blick auf deinen astrologischen Grundcode – klar, persönlich und ohne Fachsprache.</p></div><div class="card"><div class="tag">DEIN PERSÖNLICHER ASTRO-CODE</div><p>Geburtsdatum, genaue Uhrzeit und Geburtsort genügen.</p><button onclick="go(2)">MEINEN CODE ENTDECKEN</button></div></section>
 <section id="s2" class="step"><div class="hero"><div class="orb">☉</div><h1>Deine Geburtsdaten</h1><p>Bitte so genau wie möglich eingeben.</p></div><div class="card"><label>Vorname</label><input id="name" placeholder="Dein Vorname"><label>Geburtsdatum</label><input id="date" type="date"><label>Geburtszeit</label><input id="time" type="time"><label>Geburtsort</label><input id="place" placeholder="z. B. Überlingen, Deutschland"><div id="err" class="err"></div><button id="calc" onclick="preview()">MEINEN CODE BERECHNEN</button><button type="button" id="newPersonBtn" onclick="newPerson()" style="width:100%;padding:14px;margin-top:12px;border:1px solid #b8924f88;border-radius:14px;background:transparent;color:#b8924f;font-weight:800;font-size:14px">NEUE PERSON · DATEN LÖSCHEN</button></div></section>
