@@ -201,6 +201,23 @@
 @media print{body .card.theme-worlds-card,body .card:has(> #themeWorlds){display:none!important}}
 @media print{.build-badge{display:none!important}}
 
+/* ONLINE INFO PANELS · improve readability without changing print/report layout */
+@media screen{
+  .info-panel{
+    background:#201d18!important;
+    border-color:#8f7444!important;
+    color:#e8dfcf!important;
+    font-family:Arial,sans-serif!important;
+    font-size:14px!important;
+    line-height:1.6!important;
+  }
+  .info-panel b{
+    color:#d4a03a!important;
+    font-family:Arial,sans-serif!important;
+    font-weight:700!important;
+  }
+}
+
 /* PAYPAL SANDBOX CHECKOUT · purchase gate */
 .paywall-card{text-align:center}.paywall-price{font-size:34px;font-weight:900;color:var(--cream);margin:8px 0}.paywall-price small{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-top:5px}.paywall-status{min-height:20px;margin-top:12px;color:var(--muted);font-size:13px;line-height:1.5}.paywall-status.ok{color:#b9d7a8}.paywall-status.err{display:block;color:#e6b7a9}.paypal-wrap{margin-top:16px;min-height:45px}.sandbox-note{font-size:11px;color:#8f826e;margin-top:12px;line-height:1.5}@media print{#s0{display:none!important}}
 </style></head><body><main class="wrap"><div class="brand">INNER CODE SYSTEMS</div>
