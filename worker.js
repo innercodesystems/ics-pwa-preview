@@ -30,6 +30,27 @@ function newAccessToken(){
   return Array.from(a,b=>b.toString(16).padStart(2,"0")).join("");
 }
 
+function b64url(bytes){return btoa(String.fromCharCode(...bytes)).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");}
+function b64urlText(s){return b64url(new TextEncoder().encode(s));}
+async function adminSignature(payload,secret){
+  const key=await crypto.subtle.importKey("raw",new TextEncoder().encode(secret),{name:"HMAC",hash:"SHA-256"},false,["sign"]);
+  return b64url(new Uint8Array(await crypto.subtle.sign("HMAC",key,new TextEncoder().encode(payload))));
+}
+async function issueAdminToken(secret){
+  const payload=b64urlText(JSON.stringify({role:"owner",exp:Date.now()+30*24*60*60*1000}));
+  return payload+"."+await adminSignature(payload,secret);
+}
+async function verifyAdminToken(token,secret){
+  if(!secret||!token||!token.includes("."))return false;
+  const [payload,sig]=token.split(".");
+  if(!payload||!sig||await adminSignature(payload,secret)!==sig)return false;
+  try{
+    const raw=payload.replace(/-/g,"+").replace(/_/g,"/");
+    const data=JSON.parse(atob(raw));
+    return data.role==="owner"&&Number(data.exp)>Date.now();
+  }catch(e){return false}
+}
+
 async function accessToken(env) {
   const credentials = btoa(`${env.PAYPAL_CLIENT_ID}:${env.PAYPAL_SECRET}`);
   const r = await fetch(`${PAYPAL_BASE}/v1/oauth2/token`, {
@@ -57,6 +78,19 @@ export default {
           mode: "sandbox",
           configured: Boolean(env.PAYPAL_CLIENT_ID && env.PAYPAL_SECRET && env.DB),
         }, 200, cors);
+      }
+
+      if (url.pathname === "/api/admin/login" && request.method === "POST") {
+        if (!env.ADMIN_ACCESS_KEY) return json({ error: "Admin-Zugang ist noch nicht konfiguriert." }, 503, cors);
+        const body = await request.json().catch(()=>({}));
+        if (String(body.key || "") !== String(env.ADMIN_ACCESS_KEY)) return json({ ok: false }, 401, cors);
+        return json({ ok: true, token: await issueAdminToken(env.ADMIN_ACCESS_KEY) }, 200, cors);
+      }
+
+      if (url.pathname === "/api/admin/verify" && request.method === "POST") {
+        if (!env.ADMIN_ACCESS_KEY) return json({ valid: false }, 200, cors);
+        const body = await request.json().catch(()=>({}));
+        return json({ valid: await verifyAdminToken(String(body.token || ""), env.ADMIN_ACCESS_KEY) }, 200, cors);
       }
 
       if (url.pathname === "/api/paypal/client-id" && request.method === "GET") {
