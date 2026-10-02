@@ -699,5 +699,25 @@ async function initInnerCodeCheckout(){
   }).render('#paypalButtons');
  }catch(e){console.error(e);icsPayPalStarted=false;payStatus(e.message||'PayPal konnte nicht geladen werden.','err')}
 }
-(async function startCheckout(){let t='',e='';try{t=localStorage.getItem('icsAccessToken')||'';e=localStorage.getItem('icsAccessEmail')||''}catch(x){}if(t&&e){try{let r=await fetch(ICS_PAYPAL_API+'/api/access/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({token:t,email:e})});let d=await r.json();if(r.ok&&d.valid){go(1);return}}catch(x){}}initInnerCodeCheckout()})();
+async function recoverInnerCodeAccess(){
+ let email=prompt('Bitte gib die E-Mail-Adresse ein, mit der du INNER CODE bezahlt hast:');
+ if(!email)return;
+ payStatus('Dein Zugang wird geprüft …');
+ try{
+  let r=await fetch(ICS_PAYPAL_API+'/api/access/recover',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({email})});
+  let d=await r.json();
+  if(r.ok&&d.found&&d.accessToken){
+   try{localStorage.setItem('icsAccessToken',d.accessToken);localStorage.setItem('icsAccessEmail',email.trim().toLowerCase())}catch(x){}
+   payStatus('Zugang gefunden. Willkommen zurück.','ok');setTimeout(()=>go(1),350);return;
+  }
+  payStatus('Für diese E-Mail wurde noch kein aktiver Zugang gefunden.','err');
+ }catch(x){payStatus('Zugang konnte gerade nicht geprüft werden.','err')}
+}
+(async function startCheckout(){
+ let t='',e='';try{t=localStorage.getItem('icsAccessToken')||'';e=localStorage.getItem('icsAccessEmail')||''}catch(x){}
+ if(t&&e){try{let r=await fetch(ICS_PAYPAL_API+'/api/access/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({token:t,email:e})});let d=await r.json();if(r.ok&&d.valid){go(1);return}}catch(x){}}
+ initInnerCodeCheckout();
+ let host=document.getElementById('paypalButtons');
+ if(host&&!document.getElementById('accessRecoveryBtn')){let b=document.createElement('button');b.id='accessRecoveryBtn';b.type='button';b.className='btn secondary';b.style.marginTop='12px';b.textContent='BEREITS GEKAUFT? ZUGANG ÖFFNEN';b.onclick=recoverInnerCodeAccess;host.parentNode.appendChild(b)}
+})();
 </script></body></html>
