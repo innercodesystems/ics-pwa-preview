@@ -200,8 +200,12 @@
 .build-badge{position:fixed;right:8px;bottom:8px;z-index:10001;font:10px/1.2 Arial,sans-serif;letter-spacing:.04em;color:#8f826e;background:#151410e8;border:1px solid #b8924f55;border-radius:7px;padding:5px 7px;opacity:.8}
 @media print{body .card.theme-worlds-card,body .card:has(> #themeWorlds){display:none!important}}
 @media print{.build-badge{display:none!important}}
+
+/* PAYPAL SANDBOX CHECKOUT · purchase gate */
+.paywall-card{text-align:center}.paywall-price{font-size:34px;font-weight:900;color:var(--cream);margin:8px 0}.paywall-price small{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-top:5px}.paywall-status{min-height:20px;margin-top:12px;color:var(--muted);font-size:13px;line-height:1.5}.paywall-status.ok{color:#b9d7a8}.paywall-status.err{display:block;color:#e6b7a9}.paypal-wrap{margin-top:16px;min-height:45px}.sandbox-note{font-size:11px;color:#8f826e;margin-top:12px;line-height:1.5}@media print{#s0{display:none!important}}
 </style></head><body><main class="wrap"><div class="brand">INNER CODE SYSTEMS</div>
-<section id="s1" class="step on"><div class="hero"><div class="orb">✦</div><h1>Dein INNER CODE</h1><p>Ein erster Blick auf deinen astrologischen Grundcode – klar, persönlich und ohne Fachsprache.</p></div><div class="card"><div class="tag">DEIN PERSÖNLICHER ASTRO-CODE</div><p>Geburtsdatum, genaue Uhrzeit und Geburtsort genügen.</p><button onclick="go(2)">MEINEN CODE ENTDECKEN</button></div></section>
+<section id="s0" class="step on"><div class="hero"><div class="orb">✦</div><h1>Dein INNER CODE</h1><p>Deine persönliche astrologische Auswertung als umfangreicher Report.</p></div><div class="card paywall-card"><div class="tag">PERSÖNLICHER INNER CODE</div><div class="paywall-price">49 €<small>einmalig · persönlicher Report</small></div><p>Nach erfolgreicher Zahlung gibst du deine Geburtsdaten ein und erstellst deinen persönlichen INNER CODE.</p><div id="paypalButtons" class="paypal-wrap"></div><div id="payStatus" class="paywall-status">PayPal wird geladen …</div><div class="sandbox-note">TESTMODUS · PayPal Sandbox · Es wird kein echtes Geld belastet.</div></div></section>
+<section id="s1" class="step"><div class="hero"><div class="orb">✦</div><h1>Dein INNER CODE</h1><p>Ein erster Blick auf deinen astrologischen Grundcode – klar, persönlich und ohne Fachsprache.</p></div><div class="card"><div class="tag">DEIN PERSÖNLICHER ASTRO-CODE</div><p>Geburtsdatum, genaue Uhrzeit und Geburtsort genügen.</p><button onclick="go(2)">MEINEN CODE ENTDECKEN</button></div></section>
 <section id="s2" class="step"><div class="hero"><div class="orb">☉</div><h1>Deine Geburtsdaten</h1><p>Bitte so genau wie möglich eingeben.</p></div><div class="card"><label>Vorname</label><input id="name" placeholder="Dein Vorname"><label>Geburtsdatum</label><input id="date" type="date"><label>Geburtszeit</label><input id="time" type="time"><label>Geburtsort</label><input id="place" placeholder="z. B. Überlingen, Deutschland"><div id="err" class="err"></div><button id="calc" onclick="preview()">MEINEN CODE BERECHNEN</button><button type="button" id="newPersonBtn" onclick="newPerson()" style="width:100%;padding:14px;margin-top:12px;border:1px solid #b8924f88;border-radius:14px;background:transparent;color:#b8924f;font-weight:800;font-size:14px">NEUE PERSON · DATEN LÖSCHEN</button></div></section>
 <section id="s3" class="step result"><div id="readingProgress" aria-hidden="true"><div id="readingProgressBar"></div></div><div class="hero"><div class="orb">✧</div><h1 id="title">Mein INNER CODE</h1><p id="meta"></p></div><div id="startHereCard" class="card" style="margin-bottom:12px"><div class="tag">START HIER</div><h2 style="margin:8px 0 6px">Was möchtest du gerade?</h2><p style="margin-top:0">Du musst nicht den ganzen INNER CODE lesen. Wähle deinen Einstieg.</p><div class="start-choice-grid"><button type="button" onclick="jumpTo('onePageCodeCard')"><b>ICH WILL MICH VERSTEHEN</b><span>Kurzfassung meines Codes</span></button><button type="button" onclick="jumpTo('decisionCodeCard')"><b>ICH BRAUCHE KLARHEIT</b><span>Eine Entscheidung sortieren</span></button><button type="button" onclick="jumpTo('relationshipDepthCard')"><b>ICH WILL BEZIEHUNG VERSTEHEN</b><span>Nähe & Dynamik ansehen</span></button><button type="button" onclick="jumpTo('nextStepCodeCard')"><b>ICH WILL INS HANDELN</b><span>Meinen nächsten Schritt finden</span></button></div></div><details class="guide"><summary>☰ INNER CODE WEGWEISER <span id="buildBadge" style="float:none;margin-left:8px;font-size:9px;padding:3px 6px;border:1px solid #b8924f66;border-radius:99px">NEU SORTIERT</span></summary><div class="guide-grid" data-guide-groups="2026"><div class="guide-group-title">SCHNELLSTART</div><button data-guide-latest="next-step" onclick="jumpTo('nextStepCodeCard')"><b>★ NEU · NÄCHSTER SCHRITT</b>Ins Handeln kommen</button><button data-guide-latest="sentence-top" onclick="jumpTo('integrationSentenceCard')"><b>★ NEU · DEIN SATZ</b>Persönlicher Alltagsanker</button>
 <div class="guide-group-title">DEIN CODE</div><button onclick="jumpTo('startHereCard')"><b>START</b>Grundcode</button>
@@ -658,4 +662,25 @@ window.addEventListener('scroll',updateReadingProgress,{passive:true});window.ad
 
 function syncPrintCoverName(){let n=document.getElementById('name'),o=document.getElementById('printPersonName');if(o)o.textContent=n&&n.value.trim()?n.value.trim()+' · INNER CODE':'Persönliche Auswertung'}
 window.addEventListener('beforeprint',syncPrintCoverName);
+
+/* PAYPAL SANDBOX CHECKOUT */
+const ICS_PAYPAL_API='https://inner-code-paypal.peter-wicklein.workers.dev';
+let icsPayPalStarted=false;
+function payStatus(msg,type=''){let e=document.getElementById('payStatus');if(!e)return;e.textContent=msg;e.className='paywall-status'+(type?' '+type:'')}
+async function initInnerCodeCheckout(){
+ if(icsPayPalStarted)return;icsPayPalStarted=true;
+ try{
+  const cfg=await fetch(ICS_PAYPAL_API+'/api/paypal/client-id',{cache:'no-store'}).then(async r=>{if(!r.ok)throw Error('PayPal-Konfiguration konnte nicht geladen werden.');return r.json()});
+  await new Promise((resolve,reject)=>{if(window.paypal)return resolve();let s=document.createElement('script');s.src='https://www.paypal.com/sdk/js?client-id='+encodeURIComponent(cfg.clientId)+'&currency='+encodeURIComponent(cfg.currency||'EUR')+'&intent=capture';s.onload=resolve;s.onerror=()=>reject(Error('PayPal konnte nicht geladen werden.'));document.head.appendChild(s)});
+  payStatus('Bereit für deinen Testkauf.');
+  paypal.Buttons({
+   style:{layout:'vertical',shape:'rect',label:'paypal'},
+   createOrder:async()=>{payStatus('Bestellung wird vorbereitet …');let r=await fetch(ICS_PAYPAL_API+'/api/paypal/orders',{method:'POST',headers:{'content-type':'application/json'},body:'{}'});let d=await r.json();if(!r.ok||!d.id)throw Error(d.detail||d.message||'Bestellung konnte nicht erstellt werden.');return d.id},
+   onApprove:async data=>{payStatus('Zahlung wird bestätigt …');let r=await fetch(ICS_PAYPAL_API+'/api/paypal/orders/'+encodeURIComponent(data.orderID)+'/capture',{method:'POST'});let d=await r.json();if(!r.ok||!d.paid)throw Error('Zahlung wurde nicht bestätigt.');try{sessionStorage.setItem('icsPaidOrder',data.orderID)}catch(e){}payStatus('Zahlung bestätigt. Dein INNER CODE ist freigeschaltet.','ok');setTimeout(()=>go(1),500)},
+   onCancel:()=>payStatus('Zahlung abgebrochen. Du kannst es erneut versuchen.'),
+   onError:e=>{console.error(e);payStatus('PayPal-Test konnte nicht abgeschlossen werden. Bitte erneut versuchen.','err')}
+  }).render('#paypalButtons');
+ }catch(e){console.error(e);icsPayPalStarted=false;payStatus(e.message||'PayPal konnte nicht geladen werden.','err')}
+}
+(function startCheckout(){try{if(sessionStorage.getItem('icsPaidOrder')){go(1);return}}catch(e){}initInnerCodeCheckout()})();
 </script></body></html>
