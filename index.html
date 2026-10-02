@@ -716,7 +716,22 @@ async function recoverInnerCodeAccess(){
   payStatus('Für diese E-Mail wurde noch kein aktiver Zugang gefunden.','err');
  }catch(x){payStatus('Zugang konnte gerade nicht geprüft werden.','err')}
 }
+async function ownerAccess(){
+ let key=prompt('INNER CODE · Inhaber-Zugang\n\nBitte dein persönliches Zugangspasswort eingeben:');
+ if(!key)return false;
+ payStatus('Inhaber-Zugang wird geprüft …');
+ try{
+  let r=await fetch(ICS_PAYPAL_API+'/api/admin/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({key})});
+  let d=await r.json();
+  if(r.ok&&d.ok&&d.token){try{localStorage.setItem('icsOwnerToken',d.token)}catch(e){}history.replaceState(null,'',location.pathname);go(1);return true}
+  payStatus('Zugangspasswort nicht erkannt.','err');
+ }catch(e){payStatus('Inhaber-Zugang konnte gerade nicht geprüft werden.','err')}
+ return false;
+}
 (async function startCheckout(){
+ let ownerToken='';try{ownerToken=localStorage.getItem('icsOwnerToken')||''}catch(x){}
+ if(ownerToken){try{let r=await fetch(ICS_PAYPAL_API+'/api/admin/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({token:ownerToken})});let d=await r.json();if(r.ok&&d.valid){go(1);return}}catch(x){}}
+ if(new URLSearchParams(location.search).get('admin')==='1'){if(await ownerAccess())return}
  let t='',e='';try{t=localStorage.getItem('icsAccessToken')||'';e=localStorage.getItem('icsAccessEmail')||''}catch(x){}
  if(t&&e){try{let r=await fetch(ICS_PAYPAL_API+'/api/access/verify',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({token:t,email:e})});let d=await r.json();if(r.ok&&d.valid){go(1);return}}catch(x){}}
  initInnerCodeCheckout();
