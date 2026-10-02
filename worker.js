@@ -102,22 +102,27 @@ export default {
         if (!paid) return json({ paid: false, order: data }, r.status, cors);
         await ensureDb(env);
         const rawOrderId = capture[1];
+        const payerEmail = String(data?.payer?.email_address || "").trim().toLowerCase();
         let row = await env.DB.prepare("SELECT token FROM access_tokens WHERE order_id = ?").bind(rawOrderId).first();
         let accessTokenValue = row?.token;
         if (!accessTokenValue) {
           accessTokenValue = newAccessToken();
-          await env.DB.prepare("INSERT INTO access_tokens (token, order_id, created_at, status) VALUES (?, ?, ?, 'active')")
-            .bind(accessTokenValue, rawOrderId, new Date().toISOString()).run();
+          await env.DB.prepare("INSERT INTO access_tokens (token, order_id, created_at, status, payer_email) VALUES (?, ?, ?, 'active', ?)")
+            .bind(accessTokenValue, rawOrderId, new Date().toISOString(), payerEmail || null).run();
+        } else if (payerEmail) {
+          await env.DB.prepare("UPDATE access_tokens SET payer_email=? WHERE order_id=?").bind(payerEmail, rawOrderId).run();
         }
-        return json({ paid: true, accessToken: accessTokenValue }, 200, cors);
+        return json({ paid: true, accessToken: accessTokenValue, payerEmail }, 200, cors);
       }
 
-      if (url.pathname === "/api/access/verify" && request.method === "GET") {
-        const accessTokenValue = url.searchParams.get("token") || "";
-        if (!/^[a-f0-9]{64}$/.test(accessTokenValue)) return json({ valid: false }, 200, cors);
+      if (url.pathname === "/api/access/verify" && request.method === "POST") {
+        const body = await request.json().catch(()=>({}));
+        const accessTokenValue = String(body.token || "");
+        const email = String(body.email || "").trim().toLowerCase();
+        if (!/^[a-f0-9]{64}$/.test(accessTokenValue) || !email) return json({ valid: false }, 200, cors);
         await ensureDb(env);
-        const row = await env.DB.prepare("SELECT status FROM access_tokens WHERE token = ?").bind(accessTokenValue).first();
-        return json({ valid: Boolean(row && row.status === "active") }, 200, cors);
+        const row = await env.DB.prepare("SELECT status, payer_email FROM access_tokens WHERE token = ?").bind(accessTokenValue).first();
+        return json({ valid: Boolean(row && row.status === "active" && row.payer_email && row.payer_email === email) }, 200, cors);
       }
 
       return json({ error: "Not found" }, 404, cors);
