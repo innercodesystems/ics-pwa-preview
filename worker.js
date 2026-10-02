@@ -115,6 +115,15 @@ export default {
         return json({ paid: true, accessToken: accessTokenValue, payerEmail }, 200, cors);
       }
 
+      if (url.pathname === "/api/access/recover" && request.method === "POST") {
+        const body = await request.json().catch(()=>({}));
+        const email = String(body.email || "").trim().toLowerCase();
+        if (!email || !email.includes("@")) return json({ found: false }, 200, cors);
+        await ensureDb(env);
+        const row = await env.DB.prepare("SELECT token FROM access_tokens WHERE payer_email = ? AND status = 'active' ORDER BY created_at DESC LIMIT 1").bind(email).first();
+        return json({ found: Boolean(row?.token), accessToken: row?.token || null }, 200, cors);
+      }
+
       if (url.pathname === "/api/access/verify" && request.method === "POST") {
         const body = await request.json().catch(()=>({}));
         const accessTokenValue = String(body.token || "");
