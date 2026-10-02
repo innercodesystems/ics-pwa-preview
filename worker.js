@@ -120,7 +120,24 @@ export default {
         const email = String(body.email || "").trim().toLowerCase();
         if (!email || !email.includes("@")) return json({ found: false }, 200, cors);
         await ensureDb(env);
-        const row = await env.DB.prepare("SELECT token FROM access_tokens WHERE payer_email = ? AND status = 'active' ORDER BY created_at DESC LIMIT 1").bind(email).first();
+        let row = await env.DB.prepare("SELECT token FROM access_tokens WHERE payer_email = ? AND status = 'active' ORDER BY created_at DESC LIMIT 1").bind(email).first();
+        if (!row?.token) {
+          const legacy = await env.DB.prepare("SELECT token, order_id FROM access_tokens WHERE (payer_email IS NULL OR payer_email = '') AND status = 'active' ORDER BY created_at DESC LIMIT 20").all();
+          if (legacy.results?.length) {
+            const ppToken = await accessToken(env);
+            for (const item of legacy.results) {
+              const pr = await fetch(PAYPAL_BASE + "/v2/checkout/orders/" + encodeURIComponent(item.order_id), {headers:{Authorization:"Bearer " + ppToken}});
+              if (!pr.ok) continue;
+              const pd = await pr.json();
+              const pe = String(pd?.payer?.email_address || "").trim().toLowerCase();
+              if (pe && pe === email) {
+                await env.DB.prepare("UPDATE access_tokens SET payer_email=? WHERE order_id=?").bind(email,item.order_id).run();
+                row = {token:item.token};
+                break;
+              }
+            }
+          }
+        }
         return json({ found: Boolean(row?.token), accessToken: row?.token || null }, 200, cors);
       }
 
