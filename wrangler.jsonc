@@ -2,7 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "inner-code-paypal",
   "main": "worker.js",
-  "compatibility_date": "2026-10-01",
+  "compatibility_date": "2026-10-01",\n  "vars": {\n    "PAYPAL_CLIENT_ID": "BAARN1BHzqef4QTr9I2qqaXnJj9s6HBEeg9yGLA42dedtuF-TqHjrujVunjuAzfats6EN_EbirYkPnkz0U"\n  },
   "d1_databases": [
     {
       "binding": "DB",
