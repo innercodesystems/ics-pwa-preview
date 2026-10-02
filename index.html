@@ -676,11 +676,11 @@ async function initInnerCodeCheckout(){
   paypal.Buttons({
    style:{layout:'vertical',shape:'rect',label:'paypal'},
    createOrder:async()=>{payStatus('Bestellung wird vorbereitet …');let r=await fetch(ICS_PAYPAL_API+'/api/paypal/orders',{method:'POST',headers:{'content-type':'application/json'},body:'{}'});let d=await r.json();if(!r.ok||!d.id)throw Error(d.detail||d.message||'Bestellung konnte nicht erstellt werden.');return d.id},
-   onApprove:async data=>{payStatus('Zahlung wird bestätigt …');let r=await fetch(ICS_PAYPAL_API+'/api/paypal/orders/'+encodeURIComponent(data.orderID)+'/capture',{method:'POST'});let d=await r.json();if(!r.ok||!d.paid)throw Error('Zahlung wurde nicht bestätigt.');try{sessionStorage.setItem('icsPaidOrder',data.orderID)}catch(e){}payStatus('Zahlung bestätigt. Dein INNER CODE ist freigeschaltet.','ok');setTimeout(()=>go(1),500)},
+   onApprove:async data=>{payStatus('Zahlung wird bestätigt …');let r=await fetch(ICS_PAYPAL_API+'/api/paypal/orders/'+encodeURIComponent(data.orderID)+'/capture',{method:'POST'});let d=await r.json();if(!r.ok||!d.paid||!d.accessToken)throw Error('Zahlung wurde nicht bestätigt.');try{localStorage.setItem('icsAccessToken',d.accessToken)}catch(e){}let u=new URL(location.href);u.searchParams.set('access',d.accessToken);history.replaceState(null,'',u);payStatus('Zahlung bestätigt. Dein persönlicher Zugang ist gespeichert.','ok');setTimeout(()=>go(1),500)},
    onCancel:()=>payStatus('Zahlung abgebrochen. Du kannst es erneut versuchen.'),
    onError:e=>{console.error(e);payStatus('PayPal-Test konnte nicht abgeschlossen werden. Bitte erneut versuchen.','err')}
   }).render('#paypalButtons');
  }catch(e){console.error(e);icsPayPalStarted=false;payStatus(e.message||'PayPal konnte nicht geladen werden.','err')}
 }
-(function startCheckout(){try{if(sessionStorage.getItem('icsPaidOrder')){go(1);return}}catch(e){}initInnerCodeCheckout()})();
+(async function startCheckout(){let t='';try{let u=new URL(location.href);t=u.searchParams.get('access')||localStorage.getItem('icsAccessToken')||''}catch(e){}if(t){try{let r=await fetch(ICS_PAYPAL_API+'/api/access/verify?token='+encodeURIComponent(t),{cache:'no-store'});let d=await r.json();if(r.ok&&d.valid){try{localStorage.setItem('icsAccessToken',t)}catch(e){}go(1);return}}catch(e){}}initInnerCodeCheckout()})();
 </script></body></html>
